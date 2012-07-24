@@ -14,7 +14,7 @@ package Log
 	import starling.text.TextField;
 	import starling.textures.TextureSmoothing;
 	
-	import org.josht.starling.display.Sprite
+	import org.josht.starling.display.Sprite;
 	import starling.events.Event;
 	
 	import com.gskinner.motion.GTweener;
