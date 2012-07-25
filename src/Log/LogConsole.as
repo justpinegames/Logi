@@ -1,6 +1,7 @@
 package Log
 {
 	import flash.ui.Mouse;
+	import starling.display.Stage;
 	
 	import org.josht.starling.foxhole.controls.Button;
 	import org.josht.starling.foxhole.controls.Label;
@@ -34,6 +35,7 @@ package Log
 		private var _root:Sprite;
 		
 		private static var _console: LogConsole = null;
+		private static var _archiveOfUndisplayedLogs:Array = new Array();
 		
 		private var _scrolling: ScrollContainer;
 		private var _defaultFont:BitmapFont;
@@ -123,7 +125,12 @@ package Log
 			resizeComponents(this.stage.stageWidth, this.stage.stageHeight)
 			
 			Starling.current.nativeStage.nativeWindow.addEventListener(NativeWindowBoundsEvent.RESIZE, resizeDisplay);
-
+			
+			for each (var thing:* in _archiveOfUndisplayedLogs) 
+			{
+				this.logMessage(thing);
+			}
+			_archiveOfUndisplayedLogs = [];
 		}
 		
 		
@@ -256,5 +263,25 @@ package Log
 		{
 			return _console;
 		}
+		
+		
+		public static function staticLogMessage(thing:*):void 
+		{
+			if (getLogInstance() == null) 
+			{
+				_archiveOfUndisplayedLogs.push(thing);
+			}
+			else
+			{
+				getLogInstance().logMessage(thing);
+			}
+		}
+		
+		public static function initializeLogOnStage(starlingStage:Stage):void 
+		{
+			var logConsole:LogConsole = new LogConsole();
+			starlingStage.addChild(logConsole);
+		}
+		
 	}
 }

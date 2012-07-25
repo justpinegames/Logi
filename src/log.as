@@ -4,6 +4,6 @@ package
 	
 	public function log(message:*):void 
 	{
-		LogConsole.getLogInstance().logMessage(message);
+		LogConsole.staticLogMessage(message);
 	}
 }
