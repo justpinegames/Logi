@@ -135,10 +135,10 @@ package Log
 		
 		
 		
-		public function changeTextColor(color:uint):void
-		{
-			_format.color = color;
-		}
+		//public function changeTextColor(color:uint):void
+		//{
+			//_format.color = color;
+		//}
 		
 		public function changeBackgroundColor(color:uint, alpha:Number = 0.7):void
 		{
@@ -222,21 +222,21 @@ package Log
 				label.textFormat = format;
 				label.smoothing = TextureSmoothing.NONE;
 				label.text = text;
-				_data.push(thing.toString());
+				_data.push(thing);
 				label.validate();
 				return label;
 			};
-						
-			var consoleLabel:Label = createLabel( (new Date()).toLocaleTimeString() + ": " + thing.toString(), _format);
+			
+			var consoleLabel:Label = createLabel( (new Date()).toLocaleTimeString() + ": " + thing, _format);
 			
 			_scrolling.addChild(consoleLabel);
 			
 			var quickLabelContainer:Sprite = new Sprite();
 			
-			var quickLabelBackground:Label = createLabel(thing.toString(), _formatBackground);
+			var quickLabelBackground:Label = createLabel(thing, _formatBackground);
 			quickLabelBackground.x = -1;
 			quickLabelBackground.y = -1;
-			var quickLabel:Label = createLabel(thing.toString(), _format);
+			var quickLabel:Label = createLabel(thing, _format);
 			
 			quickLabelContainer.addChild(quickLabelBackground);
 			quickLabelContainer.addChild(quickLabel);
