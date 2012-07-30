@@ -1,9 +1,9 @@
 package  
 {
-	import Log.LogConsole;
+	import justpinegames.Log.LogConsole;
 	
-	public function log(message:*):void 
+	public function log(... arguments):void 
 	{
-		LogConsole.staticLogMessage(message);
+		LogConsole.staticLogMessage.apply(this, arguments);
 	}
 }

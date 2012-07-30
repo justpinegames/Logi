@@ -5,10 +5,9 @@ package
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	import flash.ui.Keyboard;
+	import justpinegames.Log.LogConsole;
 	import starling.display.DisplayObject;
 	import starling.display.Quad;
-	
-	import Log.LogConsole;
 	
 	import starling.core.Starling;
 	import starling.display.Stage;
@@ -27,9 +26,21 @@ package
 		
 		private function addedToStageHandler(event:Event):void
 		{
-			var logConsole:LogConsole = new LogConsole();
-			logConsole.changeTextColor(0xffffff);
-			this.stage.addChild(logConsole);
+			LogConsole.initializeLogOnStage(this.stage);
+			
+			trace(10, "10");
+			log(12, "10");
+			log(10, "10");
+			log(10, "10");
+			log(10, "10");
+			log(10, "10");
+			log(10, "10");
+			log(10, "10");
+			log(10, "10");
+			log(10, "10");
+			log(10, "10");
+			log(11, "10");
+			
 			
 			this.addEventListener(TouchEvent.TOUCH, onTouch);
 			

@@ -1,6 +1,8 @@
-package Log
+package justpinegames.Log
 {
 	import flash.ui.Mouse;
+	import org.josht.starling.foxhole.controls.renderers.IListItemRenderer;
+	import org.josht.starling.foxhole.data.ListCollection;
 	import starling.display.Stage;
 	
 	import org.josht.starling.foxhole.controls.Button;
@@ -37,7 +39,7 @@ package Log
 		private static var _console: LogConsole = null;
 		private static var _archiveOfUndisplayedLogs:Array = new Array();
 		
-		private var _scrolling: ScrollContainer;
+		//private var _scrolling: ScrollContainer;
 		private var _defaultFont:BitmapFont;
 		private var _format:BitmapFontTextFormat;
 		private var _formatBackground:BitmapFontTextFormat;
@@ -57,6 +59,8 @@ package Log
 		private var _data:Array;
 		
 		private var _quad:Quad;
+		
+		private var _list:List;
 		
 		private const VERTICAL_PADDING: Number = 5;
 		private const HORIZONTAL_PADDING: Number = 5;
@@ -93,11 +97,19 @@ package Log
 			_consoleContainer.addChild(_quad);
 
 			
-			_scrolling = new ScrollContainer();
-			_scrolling.x = HORIZONTAL_PADDING;
-			_scrolling.y = VERTICAL_PADDING;
-			_scrolling.layout = new VerticalLayout();
-			_consoleContainer.addChild(_scrolling);
+			//_scrolling = new ScrollContainer();
+			//_scrolling.x = HORIZONTAL_PADDING;
+			//_scrolling.y = VERTICAL_PADDING;
+			//_scrolling.layout = new VerticalLayout();
+			//_consoleContainer.addChild(_scrolling);
+			
+			
+			
+			_list = new List();
+			_list.isSelectable = false;
+			_list.dataProvider = new ListCollection(_data);
+			_list.itemRendererFactory = function():IListItemRenderer { return new ConsoleItemRenderer(); };
+			_consoleContainer.addChild(_list);
 			
 			var buttonDown:BitmapFontTextFormat = new BitmapFontTextFormat(_defaultFont, 16, 0xccffcc);
 			_copyButton = new Button();
@@ -134,7 +146,6 @@ package Log
 		}
 		
 		
-		
 		//public function changeTextColor(color:uint):void
 		//{
 			//_format.color = color;
@@ -156,8 +167,8 @@ package Log
 			_copyButton.x = width - 46 - HORIZONTAL_PADDING;
 			_copyButton.y = this.consoleHeight - 24 - VERTICAL_PADDING;
 			
-			_scrolling.width = this.stage.stageWidth - HORIZONTAL_PADDING * 2;
-			_scrolling.height = this.consoleHeight - VERTICAL_PADDING * 2;
+			_list.width = this.stage.stageWidth - HORIZONTAL_PADDING * 2;
+			_list.height = this.consoleHeight - VERTICAL_PADDING * 2;
 			
 			if (!_consoleVisible) 
 			{
@@ -227,9 +238,9 @@ package Log
 				return label;
 			};
 			
-			var consoleLabel:Label = createLabel( (new Date()).toLocaleTimeString() + ": " + thing, _format);
+			//var consoleLabel:Label = createLabel( (new Date()).toLocaleTimeString() + ": " + thing, _format);
 			
-			_scrolling.addChild(consoleLabel);
+			//_scrolling.addChild(consoleLabel);
 			
 			var quickLabelContainer:Sprite = new Sprite();
 			
@@ -248,14 +259,16 @@ package Log
 				_quickMessageContainer.removeChild(quickLabelContainer);
 			};
 			
-
-			
+			trace("datA:", _data);
+			//_list.dataProvider = new ListCollection(_data);
+			//_list.invalidate();
 			trace(thing);
+			
 			
 	
 			
 			//TODO: pronaci pravilan nacin kako se scroll do dolje
-			_scrolling.verticalScrollPosition = _scrolling.numChildren * 25; //_scrolling.maxVerticalScrollPosition;
+			//_scrolling.verticalScrollPosition = _scrolling.numChildren * 25; //_scrolling.maxVerticalScrollPosition;
 			
 		}
 		
@@ -265,15 +278,31 @@ package Log
 		}
 		
 		
-		public static function staticLogMessage(thing:*):void 
+		public static function staticLogMessage(... arguments):void 
 		{
+			var message:String = "";
+			var firstTime:Boolean = true;
+			
+			for each (var argument:* in arguments)
+			{
+				if (firstTime)
+				{
+					message = argument;
+					firstTime = false;
+				}
+				else
+				{
+					message += " " + argument;
+				}
+			}
+			
 			if (getLogInstance() == null) 
 			{
-				_archiveOfUndisplayedLogs.push(thing);
+				_archiveOfUndisplayedLogs.push(message);
 			}
 			else
 			{
-				getLogInstance().logMessage(thing);
+				getLogInstance().logMessage(message);
 			}
 		}
 		
@@ -282,6 +311,5 @@ package Log
 			var logConsole:LogConsole = new LogConsole();
 			starlingStage.addChild(logConsole);
 		}
-		
 	}
 }
