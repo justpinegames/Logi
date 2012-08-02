@@ -1,4 +1,4 @@
-package justpinegames.Log 
+package justpinegames.Logi 
 {
 	import org.josht.starling.foxhole.controls.Label;
 	import org.josht.starling.foxhole.controls.List;

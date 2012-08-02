@@ -4,7 +4,7 @@
   <output>
     <movie outputType="Application" />
     <movie input="" />
-    <movie path="bin\LogConsole.swf" />
+    <movie path="bin\Logi.swf" />
     <movie fps="60" />
     <movie width="640" />
     <movie height="480" />
@@ -75,7 +75,7 @@
   </library>
   <!-- Class files to compile (other referenced classes will automatically be included) -->
   <compileTargets>
-    <compile path="LogConsoleExampleMain.as" />
+    <compile path="LogiExampleMain.as" />
   </compileTargets>
   <!-- Paths to exclude from the Project Explorer tree -->
   <hiddenPaths>

@@ -6,11 +6,11 @@ package
 	import flash.events.Event;
 	import starling.core.Starling;
 	
-	public class LogConsoleExampleMain extends Sprite 
+	public class LogiExampleMain extends Sprite 
 	{
 		private var starling:Starling;
 		
-		public function LogConsoleExampleMain():void 
+		public function LogiExampleMain():void 
 		{
 			if (stage)
 			{
@@ -27,7 +27,7 @@ package
 			stage.scaleMode = StageScaleMode.NO_SCALE;
             stage.align = StageAlign.TOP_LEFT;
 			
-			starling = new Starling(LogConsoleExampleScene, stage);
+			starling = new Starling(LogiExampleScene, stage);
 			starling.start();
 		}
 	}

@@ -1,4 +1,4 @@
-package justpinegames.Log
+package justpinegames.Logi
 {
 	import com.gskinner.motion.GTweener;
 	import flash.events.Event;

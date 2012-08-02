@@ -6,7 +6,7 @@ package
 	import flash.geom.Rectangle;
 	import flash.system.Capabilities;
 	import flash.ui.Keyboard;
-	import justpinegames.Log.Console;
+	import justpinegames.Logi.Console;
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
 	import starling.display.Sprite;
@@ -16,11 +16,11 @@ package
 	import starling.events.TouchPhase;
 	import starling.text.TextField;
 	
-	public class LogConsoleExampleScene extends Sprite
+	public class LogiExampleScene extends Sprite
 	{
 		private var _message:TextField;
 		
-		public function LogConsoleExampleScene()
+		public function LogiExampleScene()
 		{
 			this.addEventListener(starling.events.Event.ADDED_TO_STAGE, addedToStageHandler);
 		}
@@ -28,7 +28,9 @@ package
 		private function addedToStageHandler(event:starling.events.Event):void
 		{			
 			log(Starling.current.context.driverInfo);
-				
+			log("Logi wants to say Hello!");
+			
+			// Create Logi console
 			var console:Console = new Console();
 			this.stage.addChild(console);
 			

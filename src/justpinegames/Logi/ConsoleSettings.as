@@ -1,4 +1,4 @@
-package justpinegames.Log 
+package justpinegames.Logi 
 {
 	/**
 	 * Used for styling console appearance and behaviour.
