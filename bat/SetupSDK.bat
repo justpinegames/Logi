@@ -5,6 +5,11 @@ set FLEX_SDK=C:\Program Files (x86)\FlashDevelop\Tools\flexsdk
 
 
 :validation
+if not exist "%FLEX_SDK%" goto anothersdk
+goto succeed
+
+:anothersdk
+set FLEX_SDK=Z:\shared\flex_sdk_4.6
 if not exist "%FLEX_SDK%" goto flexsdk
 goto succeed
 
