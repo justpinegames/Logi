@@ -1,4 +1,4 @@
-justpinegames.Logi
+Logi
 ====================
 
 [Introduction post](http://justpinegames.com/blog/2012/08/introducing-logi/)
