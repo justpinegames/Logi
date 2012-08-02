@@ -11,6 +11,8 @@ There are two modes of display:
 
 Logi is built on top of foxhole-starling so you’ll need that as well as their dependencies.
 
+Simplest way to start using Logi is to include the Logi/src/ as a source path in your project.
+
 Creating (in a Starling Sprite, after it’s added to stage):
 
     var logConsole:Console = new Console();
