@@ -5,13 +5,13 @@
 	<versionNumber>1.0</versionNumber> 
 	<filename>LogConsole</filename> 
 	
-	<name>LogConsole</name> 
+	<name>Logi</name> 
 	<description></description> 
 	<copyright></copyright> 
 	
 	<initialWindow> 
-		<title>LogConsole</title> 
-		<content>LogConsole.swf</content> 
+		<title>Logi</title> 
+		<content>Logi.swf</content> 
 		<systemChrome>standard</systemChrome> 
 		<transparent>false</transparent> 
 		<visible>true</visible>

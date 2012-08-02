@@ -24,7 +24,7 @@ set APP_ID=LogConsole
 
 :: Output
 set AIR_PATH=air
-set AIR_NAME=LogConsole
+set AIR_NAME=Logi
 
 
 :validation

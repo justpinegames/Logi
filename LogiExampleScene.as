@@ -35,6 +35,7 @@ package
 			this.stage.addChild(console);
 			
 			_message = new TextField(400, 60, "Press [Enter] to show the console!\nClick and move the mouse on the screen to log coordinates.");
+			_message.color = 0xe4e5de;
 			_message.x = this.stage.stageWidth / 2 - _message.width / 2;
 			_message.y = this.stage.stageHeight / 2 - _message.height / 2;
 			this.addChild(_message);

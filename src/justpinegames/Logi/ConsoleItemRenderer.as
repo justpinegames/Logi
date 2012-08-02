@@ -7,6 +7,7 @@ package justpinegames.Logi
 	import org.josht.starling.foxhole.text.BitmapFontTextFormat;
 	import org.osflash.signals.ISignal;
 	import org.osflash.signals.Signal;
+	import starling.events.Event;
 	import starling.text.BitmapFont;
 	import starling.textures.TextureSmoothing;
 	
@@ -29,7 +30,10 @@ package justpinegames.Logi
 			_format = _format ? _format : new BitmapFontTextFormat(new BitmapFont(), 16, labelColor);
 			_formatHighlight = _formatHighlight ? _formatHighlight : new BitmapFontTextFormat(new BitmapFont(), 16, labelColorHighlight);
 			_label = new Label();
-			_label.textFormat = _format;
+			_label.addEventListener(Event.ADDED, function(e:Event):void
+			{
+				_label.textFormat = _format;
+			});
 			_label.smoothing = TextureSmoothing.NONE;
 			this.addChild(_label);
 		}

@@ -66,11 +66,6 @@ package justpinegames.Logi
 			this.addEventListener(starling.events.Event.ADDED_TO_STAGE, addedToStageHandler);
 		}
 		
-		private function get consoleHeight():Number 
-		{
-			return _consoleHeight;
-		}
-		
 		public function get isShown():Boolean 
 		{
 			return _isShown;
@@ -103,10 +98,10 @@ package justpinegames.Logi
 			
 			_consoleContainer = new FoxholeControl();
 			_consoleContainer.alpha = 0;
-			_consoleContainer.y = -this.consoleHeight;
+			_consoleContainer.y = -_consoleHeight;
 			this.addChild(_consoleContainer);
 			
-			_quad = new Quad(this.stage.stageWidth, this.consoleHeight, _consoleSettings.consoleBackground);
+			_quad = new Quad(this.stage.stageWidth, _consoleHeight, _consoleSettings.consoleBackground);
 			_quad.alpha = _consoleSettings.consoleTransparency;
 			_consoleContainer.addChild(_quad);
 			
@@ -169,17 +164,17 @@ package justpinegames.Logi
 			_consoleHeight = height * _consoleSettings.consoleSize;
 			
 			_quad.width = width;
-			_quad.height = this.consoleHeight;
+			_quad.height = _consoleHeight;
 			
 			_copyButton.x = width - 68 - HORIZONTAL_PADDING;
-			_copyButton.y = this.consoleHeight - 20 - VERTICAL_PADDING;
+			_copyButton.y = _consoleHeight - 20 - VERTICAL_PADDING;
 			
 			_list.width = this.stage.stageWidth - HORIZONTAL_PADDING * 2;
-			_list.height = this.consoleHeight - VERTICAL_PADDING * 2;
+			_list.height = _consoleHeight - VERTICAL_PADDING * 2;
 			
 			if (!_isShown) 
 			{
-				_consoleContainer.y = -this.consoleHeight;
+				_consoleContainer.y = -_consoleHeight;
 			}
 		}
 		
@@ -195,7 +190,7 @@ package justpinegames.Logi
 		
 		private function hide():void 
 		{
-			GTweener.to(_consoleContainer, _consoleSettings.animationTime, { y: -this.consoleHeight, alpha: 0 }).onComplete = function():void 
+			GTweener.to(_consoleContainer, _consoleSettings.animationTime, { y: -_consoleHeight, alpha: 0 }).onComplete = function():void 
 			{
 				_consoleContainer.visible = false;	
 			};
