@@ -35,9 +35,8 @@ package justpinegames.Log
 		private var _consoleContainer:Sprite;
 		private var _hudContainer:ScrollContainer;
 		private var _consoleHeight:Number;
-		private var _consoleVisible:Boolean;
+		private var _isShown:Boolean;
 		private var _copyButton:Button;
-		private var _currentlyVisible:Array;
 		private var _data:Array;
 		private var _quad:Quad;
 		private var _list:List;
@@ -57,7 +56,6 @@ package justpinegames.Log
 			_console = _console ? _console : this;
 			
 			_data = [];
-			_currentlyVisible = [];
 			
 			_defaultFont = new BitmapFont();
 			_format = new BitmapFontTextFormat(_defaultFont, 16, _consoleSettings.textColor);
@@ -73,21 +71,21 @@ package justpinegames.Log
 			return _consoleHeight;
 		}
 		
-		public function get consoleVisible():Boolean 
+		public function get isShown():Boolean 
 		{
-			return _consoleVisible;
+			return _isShown;
 		}
 		
-		public function set consoleVisible(value:Boolean):void 
+		public function set isShown(value:Boolean):void 
 		{
-			if (_consoleVisible == value) 
+			if (_isShown == value) 
 			{
 				return;
 			}
 			
-			_consoleVisible = value;
+			_isShown = value;
 			
-			if (_consoleVisible) 
+			if (_isShown) 
 			{
 				show();
 			}
@@ -101,7 +99,7 @@ package justpinegames.Log
 		{
 			_consoleHeight = this.stage.stageHeight * _consoleSettings.consoleSize;
 			
-			_consoleVisible = false;
+			_isShown = false;
 			
 			_consoleContainer = new FoxholeControl();
 			_consoleContainer.alpha = 0;
@@ -179,7 +177,7 @@ package justpinegames.Log
 			_list.width = this.stage.stageWidth - HORIZONTAL_PADDING * 2;
 			_list.height = this.consoleHeight - VERTICAL_PADDING * 2;
 			
-			if (!_consoleVisible) 
+			if (!_isShown) 
 			{
 				_consoleContainer.y = -this.consoleHeight;
 			}
@@ -192,7 +190,7 @@ package justpinegames.Log
 			GTweener.to(_consoleContainer, _consoleSettings.animationTime, { y: 0, alpha: 1 } );
 			GTweener.to(_hudContainer, _consoleSettings.animationTime, { alpha: 0 } );
 			
-			_consoleVisible = true;
+			_isShown = true;
 		}
 		
 		private function hide():void 
@@ -204,7 +202,7 @@ package justpinegames.Log
 			
 			GTweener.to(_hudContainer, _consoleSettings.animationTime, { alpha: 1 } );
 			
-			_consoleVisible = false;
+			_isShown = false;
 		}
 		
 		private function copyLine(list:List):void

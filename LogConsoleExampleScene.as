@@ -48,7 +48,7 @@ package
 			if (e.keyCode == Keyboard.ENTER) 
 			{
 				var console:Console = Console.getMainConsoleInstance();
-				console.consoleVisible = !console.consoleVisible;
+				console.isShown = !console.isShown;
 			}
 		}
 		
