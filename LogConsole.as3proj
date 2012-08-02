@@ -5,7 +5,7 @@
     <movie outputType="Application" />
     <movie input="" />
     <movie path="bin\LogConsole.swf" />
-    <movie fps="30" />
+    <movie fps="60" />
     <movie width="640" />
     <movie height="480" />
     <movie version="3" />
@@ -20,6 +20,7 @@
     <class path="..\..\SharedLibs\as3-signals\src" />
     <class path="..\..\SharedLibs\GTween_v2_01\src" />
     <class path="..\..\SharedLibs\foxhole-starling\source" />
+    <class path="." />
   </classpaths>
   <!-- Build options -->
   <build>
@@ -74,7 +75,7 @@
   </library>
   <!-- Class files to compile (other referenced classes will automatically be included) -->
   <compileTargets>
-    <compile path="src\LogConsoleExampleMain.as" />
+    <compile path="LogConsoleExampleMain.as" />
   </compileTargets>
   <!-- Paths to exclude from the Project Explorer tree -->
   <hiddenPaths>
