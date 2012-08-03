@@ -17,6 +17,7 @@ package justpinegames.Logi
 	import starling.core.Starling;
 	import starling.display.Quad;
 	import starling.events.Event;
+	import starling.events.Event;
 	import starling.text.BitmapFont;
 	import starling.textures.TextureSmoothing;
 
@@ -123,8 +124,20 @@ package justpinegames.Logi
 			_copyButton = new Button();
 			_copyButton.labelProperties.smoothing = TextureSmoothing.NONE;
 			_copyButton.label = "Copy All";
-			_copyButton.defaultTextFormat = new BitmapFontTextFormat(_defaultFont, 16, _consoleSettings.textColor);
-			_copyButton.downTextFormat = new BitmapFontTextFormat(_defaultFont, 16, _consoleSettings.highlightColor);
+			_copyButton.addEventListener(starling.events.Event.ADDED, function(e:starling.events.Event):void
+			{
+				_copyButton.defaultTextFormat = new BitmapFontTextFormat(_defaultFont, 16, _consoleSettings.textColor);
+				_copyButton.downTextFormat = new BitmapFontTextFormat(_defaultFont, 16, _consoleSettings.highlightColor);
+				
+				_copyButton.disabledSkin = null;
+				_copyButton.defaultSkin = null;
+				_copyButton.upSkin = null;
+				_copyButton.downSkin = null;
+				_copyButton.hoverSkin = null;
+				
+				_copyButton.width = 150;
+				_copyButton.height = 40;
+			});
 			_copyButton.onPress.add(copy);
 			_consoleContainer.addChild(_copyButton);
 			
@@ -166,8 +179,8 @@ package justpinegames.Logi
 			_quad.width = width;
 			_quad.height = _consoleHeight;
 			
-			_copyButton.x = width - 68 - HORIZONTAL_PADDING;
-			_copyButton.y = _consoleHeight - 20 - VERTICAL_PADDING;
+			_copyButton.x = width - 110 - HORIZONTAL_PADDING;
+			_copyButton.y = _consoleHeight - 33 - VERTICAL_PADDING;
 			
 			_list.width = this.stage.stageWidth - HORIZONTAL_PADDING * 2;
 			_list.height = _consoleHeight - VERTICAL_PADDING * 2;
@@ -247,7 +260,10 @@ package justpinegames.Logi
 			var createLabel:Function = function(text:String, format:BitmapFontTextFormat):Label
 			{
 				var label:Label = new Label();
-				label.textFormat = format;
+				label.addEventListener(starling.events.Event.ADDED, function(e:starling.events.Event):void
+				{
+					label.textFormat = format;
+				});
 				label.smoothing = TextureSmoothing.NONE;
 				label.text = text;
 				label.validate();
