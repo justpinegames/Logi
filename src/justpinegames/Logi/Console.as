@@ -4,6 +4,7 @@ package justpinegames.Logi
 	import flash.events.Event;
 	import flash.desktop.Clipboard;
 	import flash.desktop.ClipboardFormats;
+	import flash.utils.getQualifiedClassName;
 	import org.josht.starling.display.Sprite;
 	import org.josht.starling.foxhole.controls.Button;
 	import org.josht.starling.foxhole.controls.Label;
@@ -327,14 +328,29 @@ package justpinegames.Logi
 			
 			for each (var argument:* in arguments)
 			{
+				var description:String;
+				
+				if (argument == null)
+				{
+					description = "[null]"
+				}
+				else if (!("toString" in argument)) 
+				{
+					description = "[object " + getQualifiedClassName(argument) + "]";
+				}
+				else 
+				{
+					description = argument;
+				}
+				
 				if (firstTime)
 				{
-					message = argument;
+					message = description;
 					firstTime = false;
 				}
 				else
 				{
-					message += ", " + argument;
+					message += ", " + description;
 				}
 			}
 			
