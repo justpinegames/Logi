@@ -9,8 +9,8 @@ package
 	public class LogiExampleMain extends Sprite 
 	{
 		private var starling:Starling;
-		
-		public function LogiExampleMain():void 
+
+		public function LogiExampleMain():void
 		{
 			if (stage)
 			{

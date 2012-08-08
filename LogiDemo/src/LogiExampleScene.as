@@ -9,7 +9,8 @@ package
 	import justpinegames.Logi.Console;
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
-	import starling.display.Sprite;
+import starling.display.Quad;
+import starling.display.Sprite;
 	import starling.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
@@ -29,6 +30,9 @@ package
 		{			
 			log(Starling.current.context.driverInfo);
 			log("Logi wants to say Hello!");
+
+            var quad:Quad = new Quad(stage.stageWidth, stage.stageHeight, 0x2b3527);
+            this.addChild(quad);
 			
 			// Create Logi console
 			var console:Console = new Console();

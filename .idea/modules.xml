@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$CODE_DIR$/SharedSWC/Libraries/foxhole-starling/source/Foxhole-starling.iml" filepath="$CODE_DIR$/SharedSWC/Libraries/foxhole-starling/source/Foxhole-starling.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Logi.iml" filepath="$PROJECT_DIR$/Logi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/LogiDemo/LogiDemo.iml" filepath="$PROJECT_DIR$/LogiDemo/LogiDemo.iml" />
+      <module fileurl="file://$CODE_DIR$/SharedSWC/Libraries/Starling-Framework/starling/src/Starling.iml" filepath="$CODE_DIR$/SharedSWC/Libraries/Starling-Framework/starling/src/Starling.iml" />
+    </modules>
+  </component>
+</project>
+
