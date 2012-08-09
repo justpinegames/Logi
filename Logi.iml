@@ -5,16 +5,16 @@
       <configuration name="Logi" pure-as="true" output-type="Library" output-file="Logi.swc" output-folder="$MODULE_DIR$/bin">
         <dependencies target-player="11.1">
           <entries>
-            <entry module-name="Starling" build-configuration-name="Starling">
+            <entry module-name="Starling" build-configuration-name="starling">
               <dependency linkage="Merged" />
             </entry>
             <entry module-name="Foxhole-starling" build-configuration-name="foxhole">
               <dependency linkage="Merged" />
             </entry>
-            <entry library-name="GTween_V2_01" library-level="project">
+            <entry library-id="e2a87040-483f-46f6-8251-47966ff424d8">
               <dependency linkage="Merged" />
             </entry>
-            <entry library-name="as3-signals-v0.9-BETA" library-level="project">
+            <entry library-id="bbb54223-e849-4124-9077-334006a8862d">
               <dependency linkage="Merged" />
             </entry>
           </entries>
@@ -37,8 +37,26 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="Starling" />
     <orderEntry type="module" module-name="Foxhole-starling" />
-    <orderEntry type="library" name="GTween_V2_01" level="project" />
-    <orderEntry type="library" name="as3-signals-v0.9-BETA" level="project" />
+    <orderEntry type="module-library">
+      <library type="flex">
+        <properties id="e2a87040-483f-46f6-8251-47966ff424d8" />
+        <CLASSES>
+          <root url="jar://$CODE_DIR$/SharedSWC/external/as3-signals-v0.9-BETA.swc!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library type="flex">
+        <properties id="bbb54223-e849-4124-9077-334006a8862d" />
+        <CLASSES>
+          <root url="jar://$CODE_DIR$/SharedSWC/external/GTween_V2_01.swc!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>
 

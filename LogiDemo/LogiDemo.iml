@@ -11,7 +11,7 @@
             <entry module-name="Foxhole-starling" build-configuration-name="foxhole">
               <dependency linkage="Merged" />
             </entry>
-            <entry module-name="Starling" build-configuration-name="Starling">
+            <entry module-name="Starling" build-configuration-name="starling">
               <dependency linkage="Merged" />
             </entry>
           </entries>
