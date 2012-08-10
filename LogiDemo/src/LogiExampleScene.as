@@ -31,9 +31,6 @@ import starling.display.Sprite;
 			log(Starling.current.context.driverInfo);
 			log("Logi wants to say Hello!");
 
-            var quad:Quad = new Quad(stage.stageWidth, stage.stageHeight, 0x2b3527);
-            this.addChild(quad);
-			
 			// Create Logi console
 			var console:Console = new Console();
 			this.stage.addChild(console);

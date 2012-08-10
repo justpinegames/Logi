@@ -7,17 +7,16 @@ package justpinegames.Logi
 	import flash.utils.getQualifiedClassName;
 	import org.josht.starling.display.Sprite;
 	import org.josht.starling.foxhole.controls.Button;
-	import org.josht.starling.foxhole.controls.Label;
 	import org.josht.starling.foxhole.controls.List;
 	import org.josht.starling.foxhole.controls.renderers.IListItemRenderer;
 	import org.josht.starling.foxhole.controls.ScrollContainer;
-	import org.josht.starling.foxhole.core.FoxholeControl;
+    import org.josht.starling.foxhole.controls.text.BitmapFontTextRenderer;
+    import org.josht.starling.foxhole.core.FoxholeControl;
 	import org.josht.starling.foxhole.data.ListCollection;
 	import org.josht.starling.foxhole.layout.VerticalLayout;
 	import org.josht.starling.foxhole.text.BitmapFontTextFormat;
 	import starling.core.Starling;
 	import starling.display.Quad;
-	import starling.events.Event;
 	import starling.events.Event;
 	import starling.text.BitmapFont;
 	import starling.textures.TextureSmoothing;
@@ -123,22 +122,32 @@ package justpinegames.Logi
 			_consoleContainer.addChild(_list);
 			
 			_copyButton = new Button();
-			_copyButton.labelProperties.smoothing = TextureSmoothing.NONE;
+
 			_copyButton.label = "Copy All";
-			_copyButton.addEventListener(starling.events.Event.ADDED, function(e:starling.events.Event):void
+            _copyButton.defaultSkin = new Quad(100, 20, 0xff0000);
+
+            _copyButton.addEventListener(starling.events.Event.ADDED, function(e:starling.events.Event):void
 			{
-				_copyButton.defaultTextFormat = new BitmapFontTextFormat(_defaultFont, 16, _consoleSettings.textColor);
-				_copyButton.downTextFormat = new BitmapFontTextFormat(_defaultFont, 16, _consoleSettings.highlightColor);
-				
-				_copyButton.disabledSkin = null;
+                /*
+                _copyButton.defaultLabelProperties.smoothing = TextureSmoothing.NONE;
+                _copyButton.downLabelProperties.smoothing = TextureSmoothing.NONE;
+                                                       */
+                _copyButton.defaultSelectedLabelProperties.textFormat = new BitmapFontTextFormat(_defaultFont, 16, _consoleSettings.textColor);
+
+                _copyButton.defaultLabelProperties.defaultTextFormat = new BitmapFontTextFormat(_defaultFont, 16, _consoleSettings.textColor);
+                _copyButton.downLabelProperties.downTextFormat = new BitmapFontTextFormat(_defaultFont, 16, _consoleSettings.highlightColor);
+                            /*
+                _copyButton.disabledSkin = null;
 				_copyButton.defaultSkin = null;
 				_copyButton.upSkin = null;
 				_copyButton.downSkin = null;
 				_copyButton.hoverSkin = null;
-				
-				_copyButton.width = 150;
+				              */
+                _copyButton.width = 150;
 				_copyButton.height = 40;
-			});
+                _copyButton.label = "Copy All";
+
+            });
 			_copyButton.onPress.add(copy);
 			_consoleContainer.addChild(_copyButton);
 			
@@ -180,8 +189,8 @@ package justpinegames.Logi
 			_quad.width = width;
 			_quad.height = _consoleHeight;
 			
-			_copyButton.x = width - 110 - HORIZONTAL_PADDING;
-			_copyButton.y = _consoleHeight - 33 - VERTICAL_PADDING;
+			_copyButton.x = width - 110 - HORIZONTAL_PADDING -100;
+			_copyButton.y = _consoleHeight - 33 - VERTICAL_PADDING - 50;
 			
 			_list.width = this.stage.stageWidth - HORIZONTAL_PADDING * 2;
 			_list.height = _consoleHeight - VERTICAL_PADDING * 2;
@@ -258,9 +267,9 @@ package justpinegames.Logi
 			
 			_list.dataProvider.push({label: labelDisplay, data: message});
 			
-			var createLabel:Function = function(text:String, format:BitmapFontTextFormat):Label
+			var createLabel:Function = function(text:String, format:BitmapFontTextFormat):BitmapFontTextRenderer
 			{
-				var label:Label = new Label();
+				var label:BitmapFontTextRenderer = new BitmapFontTextRenderer();
 				label.addEventListener(starling.events.Event.ADDED, function(e:starling.events.Event):void
 				{
 					label.textFormat = format;
@@ -277,7 +286,7 @@ package justpinegames.Logi
 			
 			var addBackground:Function = function(offsetX:int, offsetY: int):void 
 			{
-				var hudLabelBackground:Label = createLabel(message, _formatBackground);
+				var hudLabelBackground:BitmapFontTextRenderer = createLabel(message, _formatBackground);
 				hudLabelBackground.x = offsetX;
 				hudLabelBackground.y = offsetY;
 				hudLabelContainer.addChild(hudLabelBackground);
@@ -288,7 +297,7 @@ package justpinegames.Logi
 			addBackground(0, 2);
 			addBackground(2, 2);
 			
-			var hudLabel:Label = createLabel(message, _format);
+			var hudLabel:BitmapFontTextRenderer = createLabel(message, _format);
 			hudLabel.x += 1;
 			hudLabel.y += 1;
 			hudLabelContainer.addChild(hudLabel);
