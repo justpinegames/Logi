@@ -124,30 +124,23 @@ package justpinegames.Logi
 			_copyButton = new Button();
 
 			_copyButton.label = "Copy All";
-            _copyButton.defaultSkin = new Quad(100, 20, 0xff0000);
-
-            _copyButton.addEventListener(starling.events.Event.ADDED, function(e:starling.events.Event):void
+			_copyButton.addEventListener(starling.events.Event.ADDED, function(e:starling.events.Event):void
 			{
-                /*
                 _copyButton.defaultLabelProperties.smoothing = TextureSmoothing.NONE;
                 _copyButton.downLabelProperties.smoothing = TextureSmoothing.NONE;
-                                                       */
-                _copyButton.defaultSelectedLabelProperties.textFormat = new BitmapFontTextFormat(_defaultFont, 16, _consoleSettings.textColor);
 
-                _copyButton.defaultLabelProperties.defaultTextFormat = new BitmapFontTextFormat(_defaultFont, 16, _consoleSettings.textColor);
-                _copyButton.downLabelProperties.downTextFormat = new BitmapFontTextFormat(_defaultFont, 16, _consoleSettings.highlightColor);
-                            /*
-                _copyButton.disabledSkin = null;
+				_copyButton.defaultLabelProperties.textFormat = new BitmapFontTextFormat(_defaultFont, 16, _consoleSettings.textColor);
+				_copyButton.downLabelProperties.textFormat = new BitmapFontTextFormat(_defaultFont, 16, _consoleSettings.highlightColor);
+
+				_copyButton.disabledSkin = null;
 				_copyButton.defaultSkin = null;
 				_copyButton.upSkin = null;
 				_copyButton.downSkin = null;
 				_copyButton.hoverSkin = null;
-				              */
-                _copyButton.width = 150;
-				_copyButton.height = 40;
-                _copyButton.label = "Copy All";
 
-            });
+				_copyButton.width = 150;
+				_copyButton.height = 40;
+			});
 			_copyButton.onPress.add(copy);
 			_consoleContainer.addChild(_copyButton);
 			
@@ -189,8 +182,8 @@ package justpinegames.Logi
 			_quad.width = width;
 			_quad.height = _consoleHeight;
 			
-			_copyButton.x = width - 110 - HORIZONTAL_PADDING -100;
-			_copyButton.y = _consoleHeight - 33 - VERTICAL_PADDING - 50;
+			_copyButton.x = width - 110 - HORIZONTAL_PADDING;
+			_copyButton.y = _consoleHeight - 33 - VERTICAL_PADDING;
 			
 			_list.width = this.stage.stageWidth - HORIZONTAL_PADDING * 2;
 			_list.height = _consoleHeight - VERTICAL_PADDING * 2;
