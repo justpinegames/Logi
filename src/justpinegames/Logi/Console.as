@@ -132,11 +132,10 @@ package justpinegames.Logi
 				_copyButton.defaultLabelProperties.textFormat = new BitmapFontTextFormat(_defaultFont, 16, _consoleSettings.textColor);
 				_copyButton.downLabelProperties.textFormat = new BitmapFontTextFormat(_defaultFont, 16, _consoleSettings.highlightColor);
 
-				_copyButton.disabledSkin = null;
-				_copyButton.defaultSkin = null;
-				_copyButton.upSkin = null;
-				_copyButton.downSkin = null;
-				_copyButton.hoverSkin = null;
+                _copyButton.stateToSkinFunction = function(target:Object, state:Object, oldValue:Object = null):Object
+                {
+                    return null;
+                };
 
 				_copyButton.width = 150;
 				_copyButton.height = 40;
@@ -157,7 +156,7 @@ package justpinegames.Logi
 			_hudContainer.verticalScrollPolicy = ScrollContainer.SCROLL_POLICY_OFF;
 			this.addChild(_hudContainer);
 			
-			this.setScreenSize(this.stage.stageWidth, this.stage.stageHeight)
+			this.setScreenSize(Starling.current.nativeStage.stageWidth, Starling.current.nativeStage.stageHeight);
 			
 			for each (var undisplayedMessage:* in _archiveOfUndisplayedLogs) 
 			{
