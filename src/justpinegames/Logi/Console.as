@@ -8,7 +8,8 @@ package justpinegames.Logi
 	import org.josht.starling.display.Sprite;
 	import org.josht.starling.foxhole.controls.Button;
 	import org.josht.starling.foxhole.controls.List;
-	import org.josht.starling.foxhole.controls.renderers.IListItemRenderer;
+import org.josht.starling.foxhole.controls.Scroller;
+import org.josht.starling.foxhole.controls.renderers.IListItemRenderer;
 	import org.josht.starling.foxhole.controls.ScrollContainer;
     import org.josht.starling.foxhole.controls.text.BitmapFontTextRenderer;
     import org.josht.starling.foxhole.core.FoxholeControl;
@@ -153,7 +154,7 @@ package justpinegames.Logi
 			_hudContainer.y = VERTICAL_PADDING;
 			_hudContainer.touchable = false;
 			_hudContainer.layout = new VerticalLayout();
-			_hudContainer.verticalScrollPolicy = ScrollContainer.SCROLL_POLICY_OFF;
+			_hudContainer.scrollerProperties.verticalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
 			this.addChild(_hudContainer);
 			
 			this.setScreenSize(Starling.current.nativeStage.stageWidth, Starling.current.nativeStage.stageHeight);
