@@ -303,7 +303,8 @@ import org.josht.starling.foxhole.controls.renderers.IListItemRenderer;
 			};
 				
 			// TODO use the correct API, currently there is a problem with List max vertical position. A bug in foxhole?
-			_list.verticalScrollPosition = _list.dataProvider.length * 20;
+			_list.verticalScrollPosition = Math.max(_list.dataProvider.length * 20 - _list.height, 0);
+
 		}
 		
 		/**
