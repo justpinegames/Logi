@@ -9,7 +9,7 @@ There are two modes of display:
 * Console - can be shown/hidden and looks like a regular commandline prompt
 * HUD - when the console is hidden, traces appear for a limited time on the screen.
 
-Logi is built on top of foxhole-starling so you’ll need that as well as their dependencies.
+Logi is built on top of [Feathers](http://feathersui.com) so you’ll need that.
 
 Simplest way to start using Logi is to include the Logi/src/ as a source path in your project.
 
