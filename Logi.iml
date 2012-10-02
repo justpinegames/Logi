@@ -8,13 +8,13 @@
             <entry module-name="Starling" build-configuration-name="starling">
               <dependency linkage="Merged" />
             </entry>
-            <entry module-name="Foxhole-starling" build-configuration-name="foxhole">
-              <dependency linkage="Merged" />
-            </entry>
             <entry library-id="e2a87040-483f-46f6-8251-47966ff424d8">
               <dependency linkage="Merged" />
             </entry>
             <entry library-id="bbb54223-e849-4124-9077-334006a8862d">
+              <dependency linkage="Merged" />
+            </entry>
+            <entry module-name="Feathers" build-configuration-name="Feathers">
               <dependency linkage="Merged" />
             </entry>
           </entries>
@@ -36,7 +36,6 @@
     <orderEntry type="jdk" jdkName="flex_sdk_4" jdkType="Flex SDK Type (new)" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="Starling" />
-    <orderEntry type="module" module-name="Foxhole-starling" />
     <orderEntry type="module-library">
       <library type="flex">
         <properties id="e2a87040-483f-46f6-8251-47966ff424d8" />
@@ -57,6 +56,7 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="module" module-name="Feathers" />
   </component>
   <component name="org.twodividedbyzero.idea.findbugs">
     <option name="_basePreferences">

@@ -5,17 +5,17 @@ package justpinegames.Logi
 	import flash.desktop.Clipboard;
 	import flash.desktop.ClipboardFormats;
 	import flash.utils.getQualifiedClassName;
-	import org.josht.starling.display.Sprite;
-	import org.josht.starling.foxhole.controls.Button;
-	import org.josht.starling.foxhole.controls.List;
-import org.josht.starling.foxhole.controls.Scroller;
-import org.josht.starling.foxhole.controls.renderers.IListItemRenderer;
-	import org.josht.starling.foxhole.controls.ScrollContainer;
-    import org.josht.starling.foxhole.controls.text.BitmapFontTextRenderer;
-    import org.josht.starling.foxhole.core.FoxholeControl;
-	import org.josht.starling.foxhole.data.ListCollection;
-	import org.josht.starling.foxhole.layout.VerticalLayout;
-	import org.josht.starling.foxhole.text.BitmapFontTextFormat;
+	import feathers.display.Sprite;
+	import feathers.controls.Button;
+	import feathers.controls.List;
+import feathers.controls.Scroller;
+import feathers.controls.renderers.IListItemRenderer;
+	import feathers.controls.ScrollContainer;
+    import feathers.controls.text.BitmapFontTextRenderer;
+    import feathers.core.FeathersControl;
+	import feathers.data.ListCollection;
+	import feathers.layout.VerticalLayout;
+	import feathers.text.BitmapFontTextFormat;
 	import starling.core.Starling;
 	import starling.display.Quad;
 	import starling.events.Event;
@@ -98,7 +98,7 @@ import org.josht.starling.foxhole.controls.renderers.IListItemRenderer;
 			
 			_isShown = false;
 			
-			_consoleContainer = new FoxholeControl();
+			_consoleContainer = new FeathersControl();
 			_consoleContainer.alpha = 0;
 			_consoleContainer.y = -_consoleHeight;
 			this.addChild(_consoleContainer);
@@ -273,7 +273,7 @@ import org.josht.starling.foxhole.controls.renderers.IListItemRenderer;
 				return label;
 			};
 			
-			var hudLabelContainer:FoxholeControl = new FoxholeControl();
+			var hudLabelContainer:FeathersControl = new FeathersControl();
 			hudLabelContainer.width = 640;
 			hudLabelContainer.height = 20;
 			
