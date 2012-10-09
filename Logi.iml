@@ -8,13 +8,10 @@
             <entry module-name="Starling" build-configuration-name="starling">
               <dependency linkage="Merged" />
             </entry>
-            <entry library-id="e2a87040-483f-46f6-8251-47966ff424d8">
-              <dependency linkage="Merged" />
-            </entry>
-            <entry library-id="bbb54223-e849-4124-9077-334006a8862d">
-              <dependency linkage="Merged" />
-            </entry>
             <entry module-name="Feathers" build-configuration-name="Feathers">
+              <dependency linkage="Merged" />
+            </entry>
+            <entry library-id="256bfb9e-f806-4351-9a8e-afba93f3956e">
               <dependency linkage="Merged" />
             </entry>
           </entries>
@@ -36,19 +33,10 @@
     <orderEntry type="jdk" jdkName="flex_sdk_4" jdkType="Flex SDK Type (new)" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="Starling" />
+    <orderEntry type="module" module-name="Feathers" />
     <orderEntry type="module-library">
       <library type="flex">
-        <properties id="e2a87040-483f-46f6-8251-47966ff424d8" />
-        <CLASSES>
-          <root url="jar://$CODE_DIR$/SharedSWC/external/as3-signals-v0.9-BETA.swc!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library type="flex">
-        <properties id="bbb54223-e849-4124-9077-334006a8862d" />
+        <properties id="256bfb9e-f806-4351-9a8e-afba93f3956e" />
         <CLASSES>
           <root url="jar://$CODE_DIR$/SharedSWC/external/GTween_V2_01.swc!/" />
         </CLASSES>
@@ -56,7 +44,6 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module" module-name="Feathers" />
   </component>
   <component name="org.twodividedbyzero.idea.findbugs">
     <option name="_basePreferences">
