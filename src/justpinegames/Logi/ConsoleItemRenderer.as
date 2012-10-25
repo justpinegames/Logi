@@ -5,8 +5,6 @@ package justpinegames.Logi
     import feathers.controls.text.BitmapFontTextRenderer;
     import feathers.core.FeathersControl;
 	import feathers.text.BitmapFontTextFormat;
-	import org.osflash.signals.ISignal;
-	import org.osflash.signals.Signal;
 	import starling.events.Event;
 	import starling.text.BitmapFont;
 	import starling.textures.TextureSmoothing;
@@ -16,14 +14,14 @@ package justpinegames.Logi
 		private static var _format:BitmapFontTextFormat = null;
 		private static var _formatHighlight:BitmapFontTextFormat = null;
 		
-		private var _onChange:Signal = new Signal(ConsoleItemRenderer);
-		
 		private var _data:Object;
 		private var _index:int;
 		private var _owner:List;
 		private var _isSelected:Boolean;
 		
 		private var _label:BitmapFontTextRenderer;
+		
+		[Event(name="change",type="starling.events.Event")]
 		
 		public function ConsoleItemRenderer(labelColor:int, labelColorHighlight:int) 
 		{	
@@ -96,12 +94,8 @@ package justpinegames.Logi
 			}
 			
 			_isSelected = value;
-			_onChange.dispatch(this);
+			dispatchEventWith(Event.CHANGE);
 		}
 		 
-		public function get onChange():ISignal 
-		{
-			return this._onChange;
-		}
 	}
 }
