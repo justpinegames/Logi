@@ -1,6 +1,5 @@
 package justpinegames.Logi
 {
-	import flash.events.Event;
 	import flash.desktop.Clipboard;
 	import flash.desktop.ClipboardFormats;
 	import flash.utils.getQualifiedClassName;
@@ -10,8 +9,8 @@ package justpinegames.Logi
 	import feathers.controls.Scroller;
 	import feathers.controls.renderers.IListItemRenderer;
 	import feathers.controls.ScrollContainer;
-    import feathers.controls.text.BitmapFontTextRenderer;
-    import feathers.core.FeathersControl;
+        import feathers.controls.text.BitmapFontTextRenderer;
+        import feathers.core.FeathersControl;
 	import feathers.data.ListCollection;
 	import feathers.layout.VerticalLayout;
 	import feathers.text.BitmapFontTextFormat;
@@ -19,6 +18,7 @@ package justpinegames.Logi
 	import starling.core.Starling;
 	import starling.display.Quad;
 	import starling.events.Event;
+	import starling.events.ResizeEvent;
 	import starling.text.BitmapFont;
 	import starling.textures.TextureSmoothing;
 
@@ -92,7 +92,7 @@ package justpinegames.Logi
 			}
 		}
 		
-		private function addedToStageHandler(e:starling.events.Event):void
+		private function addedToStageHandler(e:Event):void
 		{
 			_consoleHeight = this.stage.stageHeight * _consoleSettings.consoleSize;
 			
@@ -119,13 +119,13 @@ package justpinegames.Logi
 				consoleItemRenderer.height = 20;
 				return consoleItemRenderer; 
 			};
-			_list.addEventListener(starling.events.Event.CHANGE, copyLine);
+			_list.addEventListener(Event.CHANGE, copyLine);
 			_consoleContainer.addChild(_list);
 			
 			_copyButton = new Button();
 
 			_copyButton.label = "Copy All";
-			_copyButton.addEventListener(starling.events.Event.ADDED, function(e:starling.events.Event):void
+			_copyButton.addEventListener(Event.ADDED, function(e:Event):void
 			{
                 _copyButton.defaultLabelProperties.smoothing = TextureSmoothing.NONE;
                 _copyButton.downLabelProperties.smoothing = TextureSmoothing.NONE;
@@ -141,7 +141,7 @@ package justpinegames.Logi
 				_copyButton.width = 150;
 				_copyButton.height = 40;
 			});
-			_copyButton.addEventListener(starling.events.Event.SELECT, copy);
+			_copyButton.addEventListener(Event.SELECT, copy);
 			_consoleContainer.addChild(_copyButton);
 			
 			_hudContainer = new ScrollContainer();
@@ -166,9 +166,9 @@ package justpinegames.Logi
 			
 			_archiveOfUndisplayedLogs = [];
 			
-			Starling.current.nativeStage.addEventListener(flash.events.Event.RESIZE, function(e:flash.events.Event):void 
+			stage.addEventListener(ResizeEvent.RESIZE, function(e:ResizeEvent):void 
 			{
-				setScreenSize(Starling.current.nativeStage.stageWidth, Starling.current.nativeStage.stageHeight);
+				setScreenSize(stage.stageWidth, stage.stageHeight);
 			});
 		}
 		
@@ -275,7 +275,7 @@ package justpinegames.Logi
 			var createLabel:Function = function(text:String, format:BitmapFontTextFormat):BitmapFontTextRenderer
 			{
 				var label:BitmapFontTextRenderer = new BitmapFontTextRenderer();
-				label.addEventListener(starling.events.Event.ADDED, function(e:starling.events.Event):void
+				label.addEventListener(Event.ADDED, function(e:Event):void
 				{
 					label.textFormat = format;
 				});
