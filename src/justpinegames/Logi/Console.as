@@ -1,24 +1,24 @@
 package justpinegames.Logi
 {
-	import com.gskinner.motion.GTweener;
-	import flash.events.Event;
 	import flash.desktop.Clipboard;
 	import flash.desktop.ClipboardFormats;
 	import flash.utils.getQualifiedClassName;
 	import feathers.display.Sprite;
 	import feathers.controls.Button;
 	import feathers.controls.List;
-import feathers.controls.Scroller;
-import feathers.controls.renderers.IListItemRenderer;
+	import feathers.controls.Scroller;
+	import feathers.controls.renderers.IListItemRenderer;
 	import feathers.controls.ScrollContainer;
-    import feathers.controls.text.BitmapFontTextRenderer;
-    import feathers.core.FeathersControl;
+        import feathers.controls.text.BitmapFontTextRenderer;
+        import feathers.core.FeathersControl;
 	import feathers.data.ListCollection;
 	import feathers.layout.VerticalLayout;
 	import feathers.text.BitmapFontTextFormat;
+	import starling.animation.Tween;
 	import starling.core.Starling;
 	import starling.display.Quad;
 	import starling.events.Event;
+	import starling.events.ResizeEvent;
 	import starling.text.BitmapFont;
 	import starling.textures.TextureSmoothing;
 
@@ -92,7 +92,7 @@ import feathers.controls.renderers.IListItemRenderer;
 			}
 		}
 		
-		private function addedToStageHandler(e:starling.events.Event):void
+		private function addedToStageHandler(e:Event):void
 		{
 			_consoleHeight = this.stage.stageHeight * _consoleSettings.consoleSize;
 			
@@ -119,13 +119,13 @@ import feathers.controls.renderers.IListItemRenderer;
 				consoleItemRenderer.height = 20;
 				return consoleItemRenderer; 
 			};
-			_list.onChange.add(copyLine);
+			_list.addEventListener(Event.CHANGE, copyLine);
 			_consoleContainer.addChild(_list);
 			
 			_copyButton = new Button();
 
 			_copyButton.label = "Copy All";
-			_copyButton.addEventListener(starling.events.Event.ADDED, function(e:starling.events.Event):void
+			_copyButton.addEventListener(Event.ADDED, function(e:Event):void
 			{
                 _copyButton.defaultLabelProperties.smoothing = TextureSmoothing.NONE;
                 _copyButton.downLabelProperties.smoothing = TextureSmoothing.NONE;
@@ -141,7 +141,7 @@ import feathers.controls.renderers.IListItemRenderer;
 				_copyButton.width = 150;
 				_copyButton.height = 40;
 			});
-			_copyButton.onPress.add(copy);
+			_copyButton.addEventListener(Event.SELECT, copy);
 			_consoleContainer.addChild(_copyButton);
 			
 			_hudContainer = new ScrollContainer();
@@ -166,9 +166,9 @@ import feathers.controls.renderers.IListItemRenderer;
 			
 			_archiveOfUndisplayedLogs = [];
 			
-			Starling.current.nativeStage.addEventListener(flash.events.Event.RESIZE, function(e:flash.events.Event):void 
+			stage.addEventListener(ResizeEvent.RESIZE, function(e:ResizeEvent):void 
 			{
-				setScreenSize(Starling.current.nativeStage.stageWidth, Starling.current.nativeStage.stageHeight);
+				setScreenSize(stage.stageWidth, stage.stageHeight);
 			});
 		}
 		
@@ -198,20 +198,32 @@ import feathers.controls.renderers.IListItemRenderer;
 		{
 			_consoleContainer.visible = true;
 			
-			GTweener.to(_consoleContainer, _consoleSettings.animationTime, { y: 0, alpha: 1 } );
-			GTweener.to(_hudContainer, _consoleSettings.animationTime, { alpha: 0 } );
+			var __tween1:Tween = new Tween(_consoleContainer, _consoleSettings.animationTime);
+			__tween1.animate("y", 0);
+			__tween1.fadeTo(1);
+			Starling.juggler.add(__tween1);
+			
+			var __tween2:Tween = new Tween(_hudContainer, _consoleSettings.animationTime);
+			__tween2.fadeTo(0);
+			Starling.juggler.add(__tween2);
 			
 			_isShown = true;
 		}
 		
 		private function hide():void 
 		{
-			GTweener.to(_consoleContainer, _consoleSettings.animationTime, { y: -_consoleHeight, alpha: 0 }).onComplete = function():void 
+			var __tween1:Tween = new Tween(_consoleContainer, _consoleSettings.animationTime);
+			__tween1.animate("y",  -_consoleHeight);
+			__tween1.fadeTo(0);
+			__tween1.onComplete = function():void 
 			{
 				_consoleContainer.visible = false;	
 			};
+			Starling.juggler.add(__tween1);
 			
-			GTweener.to(_hudContainer, _consoleSettings.animationTime, { alpha: 1 } );
+			var __tween2:Tween = new Tween(_hudContainer, _consoleSettings.animationTime);
+			__tween2.fadeTo(1);
+			Starling.juggler.add(__tween2);
 			
 			_isShown = false;
 		}
@@ -263,7 +275,7 @@ import feathers.controls.renderers.IListItemRenderer;
 			var createLabel:Function = function(text:String, format:BitmapFontTextFormat):BitmapFontTextRenderer
 			{
 				var label:BitmapFontTextRenderer = new BitmapFontTextRenderer();
-				label.addEventListener(starling.events.Event.ADDED, function(e:starling.events.Event):void
+				label.addEventListener(Event.ADDED, function(e:Event):void
 				{
 					label.textFormat = format;
 				});
@@ -297,11 +309,15 @@ import feathers.controls.renderers.IListItemRenderer;
 			
 			_hudContainer.addChildAt(hudLabelContainer, 0);
 			
-			GTweener.to(hudLabelContainer, _consoleSettings.hudMessageFadeOutTime, { alpha: 0 }, { delay: _consoleSettings.hudMessageDisplayTime } ).onComplete = function():void
+			var __tween1:Tween = new Tween(hudLabelContainer, _consoleSettings.hudMessageFadeOutTime);
+			__tween1.delay = _consoleSettings.hudMessageDisplayTime
+			__tween1.fadeTo(0);
+			__tween1.onComplete = function():void
 			{
 				_hudContainer.removeChild(hudLabelContainer);
 			};
-				
+			Starling.juggler.add(__tween1);
+			
 			// TODO use the correct API, currently there is a problem with List max vertical position. A bug in foxhole?
 			_list.verticalScrollPosition = Math.max(_list.dataProvider.length * 20 - _list.height, 0);
 
