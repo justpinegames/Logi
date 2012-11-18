@@ -17,7 +17,9 @@
           </entries>
           <sdk name="flex_sdk_4" />
         </dependencies>
-        <compiler-options />
+        <compiler-options>
+          <option name="additionalOptions" value="-swf-version=18" />
+        </compiler-options>
         <packaging-air-desktop />
         <packaging-android />
         <packaging-ios />
