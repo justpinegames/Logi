@@ -3,7 +3,7 @@
   <component name="FlexBuildConfigurationManager" active="Logi">
     <configurations>
       <configuration name="Logi" pure-as="true" output-type="Library" output-file="Logi.swc" output-folder="$MODULE_DIR$/bin">
-        <dependencies target-player="11.1">
+        <dependencies target-player="11.5">
           <entries>
             <entry module-name="Starling" build-configuration-name="starling">
               <dependency linkage="Merged" />
@@ -34,9 +34,9 @@
     </content>
     <orderEntry type="jdk" jdkName="flex_sdk_4" jdkType="Flex SDK Type (new)" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="Starling" />
-    <orderEntry type="module" module-name="Feathers" />
-    <orderEntry type="module-library">
+    <orderEntry type="module" module-name="Starling" exported="" />
+    <orderEntry type="module" module-name="Feathers" exported="" />
+    <orderEntry type="module-library" exported="">
       <library type="flex">
         <properties id="256bfb9e-f806-4351-9a8e-afba93f3956e" />
         <CLASSES>
