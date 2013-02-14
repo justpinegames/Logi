@@ -3,7 +3,7 @@ package justpinegames.Logi
 	import flash.desktop.Clipboard;
 	import flash.desktop.ClipboardFormats;
 	import flash.utils.getQualifiedClassName;
-	import feathers.display.Sprite;
+	import starling.display.Sprite;
 	import feathers.controls.Button;
 	import feathers.controls.List;
 	import feathers.controls.Scroller;
