@@ -3,7 +3,7 @@
   <component name="FlexBuildConfigurationManager" active="Logi">
     <configurations>
       <configuration name="Logi" pure-as="true" output-type="Library" output-file="Logi.swc" output-folder="$MODULE_DIR$/bin">
-        <dependencies target-player="11.5">
+        <dependencies target-player="11.6">
           <entries>
             <entry module-name="Starling" build-configuration-name="starling">
               <dependency linkage="Merged" />
