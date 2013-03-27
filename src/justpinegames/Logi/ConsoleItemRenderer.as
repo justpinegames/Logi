@@ -1,5 +1,6 @@
 package justpinegames.Logi 
 {
+    import feathers.controls.Button;
     import feathers.controls.List;
     import feathers.controls.renderers.IListItemRenderer;
     import feathers.controls.text.BitmapFontTextRenderer;
@@ -9,7 +10,7 @@ package justpinegames.Logi
     import starling.text.BitmapFont;
     import starling.textures.TextureSmoothing;
     
-    internal class ConsoleItemRenderer extends FeathersControl implements IListItemRenderer
+    internal class ConsoleItemRenderer extends Button implements IListItemRenderer
     {
         private static var _format:BitmapFontTextFormat = null;
         private static var _formatHighlight:BitmapFontTextFormat = null;
@@ -17,30 +18,29 @@ package justpinegames.Logi
         private var _data:Object;
         private var _index:int;
         private var _owner:List;
-        private var _isSelected:Boolean;
-        
-        private var _label:BitmapFontTextRenderer;
-        
-        public function ConsoleItemRenderer(labelColor:int, labelColorHighlight:int) 
-        {   
+
+        public function ConsoleItemRenderer(labelColor:int, labelColorHighlight:int)
+        {
+            _index = -1;
             _format = _format ? _format : new BitmapFontTextFormat(new BitmapFont(), 16, labelColor);
             _formatHighlight = _formatHighlight ? _formatHighlight : new BitmapFontTextFormat(new BitmapFont(), 16, labelColorHighlight);
-            _label = new BitmapFontTextRenderer();
-            _label.addEventListener(Event.ADDED, function(e:Event):void
-            {
-                _label.textFormat = _format;
-            });
-            _label.smoothing = TextureSmoothing.NONE;
-            this.addChild(_label);
+
+            this.defaultLabelProperties.smoothing = TextureSmoothing.NONE;
+            this.downLabelProperties.smoothing = TextureSmoothing.NONE;
+
+            this.defaultLabelProperties.textFormat = new BitmapFontTextFormat(new BitmapFont(), 16, labelColor);
+            this.downLabelProperties.textFormat = new BitmapFontTextFormat(new BitmapFont(), 16, labelColor);
+
+            this.horizontalAlign = HORIZONTAL_ALIGN_LEFT;
         }
-        
+
         public function get data():Object { return _data; }
         public function set data(value:Object):void 
         {
             if (value == null) return;
-            
-            _label.text = value.label;
             _data = value;
+
+            this.label = value.label;
         }
         
         public function get index():int { return _index; }
@@ -48,16 +48,6 @@ package justpinegames.Logi
         
         public function get owner():List { return _owner; }
         public function set owner(value:List):void { _owner = value; }
-        
-        public function get isSelected():Boolean { return _isSelected; }
-        public function set isSelected(value:Boolean):void 
-        {
-            if (_isSelected == value) return;
-            
-            _label.textFormat = value ? _formatHighlight : _format;
-            
-            _isSelected = value;
-            dispatchEventWith(Event.CHANGE);
-        }
+
     }
 }

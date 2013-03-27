@@ -1,5 +1,7 @@
 package justpinegames.Logi
 {
+    import feathers.controls.renderers.DefaultListItemRenderer;
+
     import flash.desktop.Clipboard;
     import flash.desktop.ClipboardFormats;
     import flash.utils.getQualifiedClassName;
@@ -106,14 +108,16 @@ package justpinegames.Logi
             _list = new List();
             _list.x = HORIZONTAL_PADDING;
             _list.y = VERTICAL_PADDING;
+            _list.itemRendererProperties.labelField = "data";
             _list.dataProvider = new ListCollection(_data);
-            _list.itemRendererFactory = function():IListItemRenderer 
+            _list.itemRendererFactory = function():IListItemRenderer
             {
                 var consoleItemRenderer:ConsoleItemRenderer = new ConsoleItemRenderer(_consoleSettings.textColor, _consoleSettings.highlightColor);
                 consoleItemRenderer.width = _list.width;
                 consoleItemRenderer.height = 20;
-                return consoleItemRenderer; 
+                return consoleItemRenderer;
             };
+
             _consoleContainer.addChild(_list);
             
             _copyButton = new Button();
