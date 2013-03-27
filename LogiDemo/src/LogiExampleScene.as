@@ -49,22 +49,16 @@ import starling.display.Sprite;
 		
 		private function keyDown(e:KeyboardEvent):void 
 		{
-			if (e.keyCode == Keyboard.ENTER) 
-			{
-				var console:Console = Console.getMainConsoleInstance();
-				console.isShown = !console.isShown;
-			}
+            var console:Console = Console.getMainConsoleInstance();
+			if (e.keyCode == Keyboard.ENTER) console.isShown = !console.isShown;
 		}
 		
 		public override function hitTest(localPoint:Point, forTouch:Boolean = false):DisplayObject
 		{
 			var child:DisplayObject = super.hitTest(localPoint, forTouch);
 			
-			if (child)
-			{
-				return child;
-			}
-			
+			if (child) return child;
+
 			return this;
 		}
 		

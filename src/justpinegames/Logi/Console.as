@@ -3,6 +3,8 @@ package justpinegames.Logi
     import flash.desktop.Clipboard;
     import flash.desktop.ClipboardFormats;
     import flash.utils.getQualifiedClassName;
+
+    import starling.animation.Juggler;
     import starling.display.Sprite;
     import feathers.controls.Button;
     import feathers.controls.List;
@@ -16,6 +18,7 @@ package justpinegames.Logi
     import feathers.text.BitmapFontTextFormat;
     import starling.core.Starling;
     import starling.display.Quad;
+    import starling.events.EnterFrameEvent;
     import starling.events.Event;
     import starling.events.ResizeEvent;
     import starling.text.BitmapFont;
@@ -27,7 +30,7 @@ package justpinegames.Logi
     public class Console extends Sprite
     {
         private static var _console:Console;
-        private static var _archiveOfUndisplayedLogs:Array = [];
+        private static var _archiveOfUndisplayedLogs:Vector.<String> = new <String>[];
         
         private var _consoleSettings:ConsoleSettings;
         private var _defaultFont:BitmapFont;
@@ -38,10 +41,12 @@ package justpinegames.Logi
         private var _consoleHeight:Number;
         private var _isShown:Boolean;
         private var _copyButton:Button;
-        private var _data:Array;
+        private var _data:Vector.<Object>;
         private var _quad:Quad;
         private var _list:List;
-        
+
+        private var _juggler:Juggler;
+
         private const VERTICAL_PADDING: Number = 5;
         private const HORIZONTAL_PADDING: Number = 5;
         
@@ -55,8 +60,11 @@ package justpinegames.Logi
             _consoleSettings = consoleSettings ? consoleSettings : new ConsoleSettings();
             
             _console = _console ? _console : this;
-            
-            _data = [];
+
+            _juggler = new Juggler();
+            Starling
+
+            _data = new Vector.<Object>();
             
             _defaultFont = new BitmapFont();
             _format = new BitmapFontTextFormat(_defaultFont, 16, _consoleSettings.textColor);
@@ -64,7 +72,7 @@ package justpinegames.Logi
             _formatBackground = new BitmapFontTextFormat(_defaultFont, 16, _consoleSettings.textBackgroundColor);
             _formatBackground.letterSpacing = 2;
             
-            this.addEventListener(Event.ADDED_TO_STAGE, addedToStageHandler);
+            this.addEventListener(Event.ADDED_TO_STAGE, onAddedToStageHandler);
         }
         
         public function get isShown():Boolean { return _isShown; }
@@ -77,8 +85,10 @@ package justpinegames.Logi
             else          hide();
         }
         
-        private function addedToStageHandler(e:Event):void
+        private function onAddedToStageHandler(e:Event):void
         {
+            this.removeEventListener(Event.ADDED_TO_STAGE, onAddedToStageHandler);
+
             _consoleHeight = this.stage.stageHeight * _consoleSettings.consoleSize;
             
             _isShown = false;
@@ -104,7 +114,6 @@ package justpinegames.Logi
                 consoleItemRenderer.height = 20;
                 return consoleItemRenderer; 
             };
-            _list.addEventListener(Event.CHANGE, copyLine);
             _consoleContainer.addChild(_list);
             
             _copyButton = new Button();
@@ -145,14 +154,21 @@ package justpinegames.Logi
             for each (var undisplayed:* in _archiveOfUndisplayedLogs)
                 this.logMessage(undisplayed);
 
-            _archiveOfUndisplayedLogs = [];
+            _archiveOfUndisplayedLogs = new Vector.<String>();
             
             stage.addEventListener(ResizeEvent.RESIZE, function(e:ResizeEvent):void 
             {
                 setScreenSize(stage.stageWidth, stage.stageHeight);
             });
+
+            this.addEventListener(Event.ENTER_FRAME, onEnterFrame);
         }
-        
+
+        private function onEnterFrame(event:EnterFrameEvent):void
+        {
+            _juggler.advanceTime(event.passedTime);
+        }
+
         private function setScreenSize(width:Number, height:Number):void 
         {
             _consoleContainer.width = width;
@@ -176,27 +192,22 @@ package justpinegames.Logi
         {
             _consoleContainer.visible = true;
 
-            Starling.juggler.tween(_consoleContainer, _consoleSettings.animationTime, { y: 0, alpha: 1 });
-            Starling.juggler.tween(_hudContainer, _consoleSettings.animationTime, { alpha: 0 });
+            _juggler.tween(_consoleContainer, _consoleSettings.animationTime, { y: 0, alpha: 1 });
+            _juggler.tween(_hudContainer, _consoleSettings.animationTime, { alpha: 0 });
 
             _isShown = true;
         }
         
         private function hide():void 
         {
-            Starling.juggler.tween(_consoleContainer, _consoleSettings.animationTime, { y: -_consoleHeight, alpha: 0, onComplete:function():void {
+            _juggler.tween(_consoleContainer, _consoleSettings.animationTime, { y: -_consoleHeight, alpha: 0, onComplete:function():void {
                 _consoleContainer.visible = false;
             }});
-            Starling.juggler.tween(_hudContainer, _consoleSettings.animationTime, { alpha: 1 });
+            _juggler.tween(_hudContainer, _consoleSettings.animationTime, { alpha: 1 });
 
             _isShown = false;
         }
-        
-        private function copyLine(list:List):void
-        {
-            //log(list.selectedItem.data);
-        }
-        
+
         /**
          * You can use this data to save a log to the file.
          * 
@@ -223,15 +234,21 @@ package justpinegames.Logi
          */
         public function logMessage(message:String):void 
         {
-            if (_consoleSettings.traceEnabled)
-            {
-                trace(message);
-            }
-            
+            if (_consoleSettings.traceEnabled) trace(message);
+
             var labelDisplay: String = (new Date()).toLocaleTimeString() + ": " + message;
-            
+
             _list.dataProvider.push({label: labelDisplay, data: message});
-            
+
+            // TODO use the correct API, currently there is a problem with List max vertical position. A bug in foxhole?
+            //_list.verticalScrollPosition = Math.max(_list.dataProvider.length * 20 - _list.height, 0);
+            _list.scrollToDisplayIndex(_list.dataProvider.length - 1);
+
+            showInHud(message);
+        }
+
+        private function showInHud(message:String):void
+        {
             var createLabel:Function = function(text:String, format:BitmapFontTextFormat):BitmapFontTextRenderer
             {
                 var label:BitmapFontTextRenderer = new BitmapFontTextRenderer();
@@ -244,38 +261,35 @@ package justpinegames.Logi
                 label.validate();
                 return label;
             };
-            
+
             var hudLabelContainer:FeathersControl = new FeathersControl();
             hudLabelContainer.width = 640;
             hudLabelContainer.height = 20;
-            
-            var addBackground:Function = function(offsetX:int, offsetY: int):void 
+
+            var addBackground:Function = function(offsetX:int, offsetY: int):void
             {
                 var hudLabelBackground:BitmapFontTextRenderer = createLabel(message, _formatBackground);
                 hudLabelBackground.x = offsetX;
                 hudLabelBackground.y = offsetY;
                 hudLabelContainer.addChild(hudLabelBackground);
             };
-            
+
             addBackground(0, 0);
             addBackground(2, 0);
             addBackground(0, 2);
             addBackground(2, 2);
-            
+
             var hudLabel:BitmapFontTextRenderer = createLabel(message, _format);
             hudLabel.x += 1;
             hudLabel.y += 1;
             hudLabelContainer.addChild(hudLabel);
-            
+
             _hudContainer.addChildAt(hudLabelContainer, 0);
 
-            Starling.juggler.tween(hudLabelContainer, _consoleSettings.hudMessageFadeOutTime, {
+            _juggler.tween(hudLabelContainer, _consoleSettings.hudMessageFadeOutTime, {
                 delay: _consoleSettings.hudMessageDisplayTime, alpha: 0,
-                onComplete:function():void { _hudContainer.removeChild(hudLabelContainer); }
+                onComplete:function():void { hudLabelContainer.removeFromParent(true); }
             });
-
-            // TODO use the correct API, currently there is a problem with List max vertical position. A bug in foxhole?
-            _list.verticalScrollPosition = Math.max(_list.dataProvider.length * 20 - _list.height, 0);
         }
         
         /**
