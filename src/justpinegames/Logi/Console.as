@@ -117,6 +117,7 @@ package justpinegames.Logi
                 consoleItemRenderer.height = 20;
                 return consoleItemRenderer;
             };
+            _list.scrollBarDisplayMode = Scroller.SCROLL_BAR_DISPLAY_MODE_NONE;
 
             _consoleContainer.addChild(_list);
             
