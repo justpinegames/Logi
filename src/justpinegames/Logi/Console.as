@@ -14,7 +14,6 @@ package justpinegames.Logi
     import feathers.data.ListCollection;
     import feathers.layout.VerticalLayout;
     import feathers.text.BitmapFontTextFormat;
-    import starling.animation.Tween;
     import starling.core.Starling;
     import starling.display.Quad;
     import starling.events.Event;
@@ -65,31 +64,17 @@ package justpinegames.Logi
             _formatBackground = new BitmapFontTextFormat(_defaultFont, 16, _consoleSettings.textBackgroundColor);
             _formatBackground.letterSpacing = 2;
             
-            this.addEventListener(starling.events.Event.ADDED_TO_STAGE, addedToStageHandler);
+            this.addEventListener(Event.ADDED_TO_STAGE, addedToStageHandler);
         }
         
-        public function get isShown():Boolean 
-        {
-            return _isShown;
-        }
-        
+        public function get isShown():Boolean { return _isShown; }
         public function set isShown(value:Boolean):void 
         {
-            if (_isShown == value) 
-            {
-                return;
-            }
-            
+            if (_isShown == value) return;
             _isShown = value;
             
-            if (_isShown) 
-            {
-                show();
-            }
-            else 
-            {
-                hide();
-            }
+            if (_isShown) show();
+            else          hide();
         }
         
         private function addedToStageHandler(e:Event):void
@@ -141,15 +126,13 @@ package justpinegames.Logi
                 _copyButton.width = 150;
                 _copyButton.height = 40;
             });
-            _copyButton.addEventListener(Event.SELECT, copy);
+            _copyButton.addEventListener(Event.TRIGGERED, copy);
             _consoleContainer.addChild(_copyButton);
             
             _hudContainer = new ScrollContainer();
             // TODO This should be changed to prevent the hud from even creating, not just making it invisible.
-            if (!_consoleSettings.hudEnabled) 
-            {
-                _hudContainer.visible = false;
-            }
+            if (!_consoleSettings.hudEnabled) _hudContainer.visible = false;
+
             _hudContainer.x = HORIZONTAL_PADDING;
             _hudContainer.y = VERTICAL_PADDING;
             _hudContainer.touchable = false;
@@ -159,11 +142,9 @@ package justpinegames.Logi
             
             this.setScreenSize(Starling.current.nativeStage.stageWidth, Starling.current.nativeStage.stageHeight);
             
-            for each (var undisplayedMessage:* in _archiveOfUndisplayedLogs) 
-            {
-                this.logMessage(undisplayedMessage);
-            }
-            
+            for each (var undisplayed:* in _archiveOfUndisplayedLogs)
+                this.logMessage(undisplayed);
+
             _archiveOfUndisplayedLogs = [];
             
             stage.addEventListener(ResizeEvent.RESIZE, function(e:ResizeEvent):void 
@@ -188,43 +169,26 @@ package justpinegames.Logi
             _list.width = this.stage.stageWidth - HORIZONTAL_PADDING * 2;
             _list.height = _consoleHeight - VERTICAL_PADDING * 2;
             
-            if (!_isShown) 
-            {
-                _consoleContainer.y = -_consoleHeight;
-            }
+            if (!_isShown) _consoleContainer.y = -_consoleHeight;
         }
         
         private function show():void 
         {
             _consoleContainer.visible = true;
-            
-            var __tween1:Tween = new Tween(_consoleContainer, _consoleSettings.animationTime);
-            __tween1.animate("y", 0);
-            __tween1.fadeTo(1);
-            Starling.juggler.add(__tween1);
-            
-            var __tween2:Tween = new Tween(_hudContainer, _consoleSettings.animationTime);
-            __tween2.fadeTo(0);
-            Starling.juggler.add(__tween2);
-            
+
+            Starling.juggler.tween(_consoleContainer, _consoleSettings.animationTime, { y: 0, alpha: 1 });
+            Starling.juggler.tween(_hudContainer, _consoleSettings.animationTime, { alpha: 0 });
+
             _isShown = true;
         }
         
         private function hide():void 
         {
-            var __tween1:Tween = new Tween(_consoleContainer, _consoleSettings.animationTime);
-            __tween1.animate("y",  -_consoleHeight);
-            __tween1.fadeTo(0);
-            __tween1.onComplete = function():void 
-            {
-                _consoleContainer.visible = false;  
-            };
-            Starling.juggler.add(__tween1);
-            
-            var __tween2:Tween = new Tween(_hudContainer, _consoleSettings.animationTime);
-            __tween2.fadeTo(1);
-            Starling.juggler.add(__tween2);
-            
+            Starling.juggler.tween(_consoleContainer, _consoleSettings.animationTime, { y: -_consoleHeight, alpha: 0, onComplete:function():void {
+                _consoleContainer.visible = false;
+            }});
+            Starling.juggler.tween(_hudContainer, _consoleSettings.animationTime, { alpha: 1 });
+
             _isShown = false;
         }
         
@@ -241,16 +205,12 @@ package justpinegames.Logi
         public function getLogData():String 
         {
             var text:String = "";
-            
-            for each (var object:Object in _data) 
-            {
-                text += object.data + "\n";
-            }
-            
+            for each (var object:Object in _data) text += object.data + "\n";
+
             return text;
         }
         
-        private function copy(button:Button):void
+        private function copy():void
         {
             var text:String = this.getLogData();
             Clipboard.generalClipboard.setData(ClipboardFormats.TEXT_FORMAT, text);
@@ -308,19 +268,14 @@ package justpinegames.Logi
             hudLabelContainer.addChild(hudLabel);
             
             _hudContainer.addChildAt(hudLabelContainer, 0);
-            
-            var __tween1:Tween = new Tween(hudLabelContainer, _consoleSettings.hudMessageFadeOutTime);
-            __tween1.delay = _consoleSettings.hudMessageDisplayTime
-            __tween1.fadeTo(0);
-            __tween1.onComplete = function():void
-            {
-                _hudContainer.removeChild(hudLabelContainer);
-            };
-            Starling.juggler.add(__tween1);
-            
+
+            Starling.juggler.tween(hudLabelContainer, _consoleSettings.hudMessageFadeOutTime, {
+                delay: _consoleSettings.hudMessageDisplayTime, alpha: 0,
+                onComplete:function():void { _hudContainer.removeChild(hudLabelContainer); }
+            });
+
             // TODO use the correct API, currently there is a problem with List max vertical position. A bug in foxhole?
             _list.verticalScrollPosition = Math.max(_list.dataProvider.length * 20 - _list.height, 0);
-
         }
         
         /**
@@ -372,15 +327,10 @@ package justpinegames.Logi
                     message += ", " + description;
                 }
             }
-            
-            if (Console.getMainConsoleInstance() == null) 
-            {
-                _archiveOfUndisplayedLogs.push(message);
-            }
-            else
-            {
-                Console.getMainConsoleInstance().logMessage(message);
-            }
+
+            var console:Console = Console.getMainConsoleInstance();
+            if (console) console.logMessage(message);
+            else         _archiveOfUndisplayedLogs.push(message);
         }
     }
 }

@@ -8,10 +8,10 @@
             <entry module-name="Logi" build-configuration-name="Logi">
               <dependency linkage="Merged" />
             </entry>
-            <entry module-name="Foxhole-starling" build-configuration-name="foxhole">
+            <entry module-name="Starling" build-configuration-name="starling">
               <dependency linkage="Merged" />
             </entry>
-            <entry module-name="Starling" build-configuration-name="starling">
+            <entry module-name="Feathers" build-configuration-name="Feathers">
               <dependency linkage="Merged" />
             </entry>
           </entries>
@@ -34,9 +34,9 @@
     </content>
     <orderEntry type="jdk" jdkName="flex_sdk_4" jdkType="Flex SDK Type (new)" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="Logi" />
-    <orderEntry type="module" module-name="Foxhole-starling" />
-    <orderEntry type="module" module-name="Starling" />
+    <orderEntry type="module" module-name="Logi" exported="" />
+    <orderEntry type="module" module-name="Starling" exported="" />
+    <orderEntry type="module" module-name="Feathers" exported="" />
   </component>
   <component name="org.twodividedbyzero.idea.findbugs">
     <option name="_basePreferences">

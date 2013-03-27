@@ -21,8 +21,6 @@ package justpinegames.Logi
         
         private var _label:BitmapFontTextRenderer;
         
-        [Event(name="change",type="starling.events.Event")]
-        
         public function ConsoleItemRenderer(labelColor:int, labelColorHighlight:int) 
         {   
             _format = _format ? _format : new BitmapFontTextFormat(new BitmapFont(), 16, labelColor);
@@ -36,53 +34,25 @@ package justpinegames.Logi
             this.addChild(_label);
         }
         
-        public function get data():Object 
-        {
-            return _data;
-        }
-        
+        public function get data():Object { return _data; }
         public function set data(value:Object):void 
         {
-            if (value == null) 
-            {
-                return;
-            }
+            if (value == null) return;
             
             _label.text = value.label;
             _data = value;
         }
         
-        public function get index():int 
-        {
-            return _index;
-        }
+        public function get index():int { return _index; }
+        public function set index(value:int):void { _index = value; }
         
-        public function set index(value:int):void 
-        {
-            _index = value;
-        }
+        public function get owner():List { return _owner; }
+        public function set owner(value:List):void { _owner = value; }
         
-        public function get owner():List 
-        {
-            return _owner;
-        }
-        
-        public function set owner(value:List):void 
-        {
-            _owner = value;
-        }
-        
-        public function get isSelected():Boolean 
-        {
-            return _isSelected;
-        }
-        
+        public function get isSelected():Boolean { return _isSelected; }
         public function set isSelected(value:Boolean):void 
         {
-            if (_isSelected == value) 
-            {
-                return;
-            }
+            if (_isSelected == value) return;
             
             _label.textFormat = value ? _formatHighlight : _format;
             
