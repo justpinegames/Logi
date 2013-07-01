@@ -2,16 +2,16 @@
 <module type="Flex" version="4">
   <component name="FlexBuildConfigurationManager" active="LogiDemo">
     <configurations>
-      <configuration name="LogiDemo" pure-as="true" main-class="LogiExampleMain" output-file="LogiDemo.swf" output-folder="$PERSONAL_PROJECT_DIR$/Logi/bin" wrapper-template-path="$MODULE_DIR$/html-template">
+      <configuration name="LogiDemo" pure-as="true" main-class="LogiExampleMain" output-file="LogiDemo.swf" output-folder="$MODULE_DIR$/../bin" wrapper-template-path="$MODULE_DIR$/html-template">
         <dependencies target-player="11.1">
           <entries>
             <entry module-name="Logi" build-configuration-name="Logi">
               <dependency linkage="Merged" />
             </entry>
-            <entry module-name="Starling" build-configuration-name="starling">
+            <entry module-name="Feathers" build-configuration-name="Feathers">
               <dependency linkage="Merged" />
             </entry>
-            <entry module-name="Feathers" build-configuration-name="Feathers">
+            <entry module-name="Starling" build-configuration-name="starling">
               <dependency linkage="Merged" />
             </entry>
           </entries>

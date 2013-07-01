@@ -2,11 +2,12 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$CODE_DIR$/SharedSWC/feathers/feathers/Feathers.iml" filepath="$CODE_DIR$/SharedSWC/feathers/feathers/Feathers.iml" />
-      <module fileurl="file://$CODE_DIR$/SharedSWC/foxhole/foxhole-starling/Foxhole-starling.iml" filepath="$CODE_DIR$/SharedSWC/foxhole/foxhole-starling/Foxhole-starling.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../feathers/Feathers.iml" filepath="$PROJECT_DIR$/../feathers/Feathers.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../feathers/feathers/Feathers.iml" filepath="$PROJECT_DIR$/../feathers/feathers/Feathers.iml" />
       <module fileurl="file://$PROJECT_DIR$/Logi.iml" filepath="$PROJECT_DIR$/Logi.iml" />
       <module fileurl="file://$PROJECT_DIR$/LogiDemo/LogiDemo.iml" filepath="$PROJECT_DIR$/LogiDemo/LogiDemo.iml" />
-      <module fileurl="file://$CODE_DIR$/SharedSWC/starling/Starling-Framework/starling/Starling.iml" filepath="$CODE_DIR$/SharedSWC/starling/Starling-Framework/starling/Starling.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../Starling-Framework/starling/Starling.iml" filepath="$PROJECT_DIR$/../Starling-Framework/starling/Starling.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../starling/Starling-Framework/starling/Starling.iml" filepath="$PROJECT_DIR$/../starling/Starling-Framework/starling/Starling.iml" />
     </modules>
   </component>
 </project>
