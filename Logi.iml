@@ -3,7 +3,7 @@
   <component name="FlexBuildConfigurationManager" active="Logi">
     <configurations>
       <configuration name="Logi" pure-as="true" output-type="Library" output-file="Logi.swc" output-folder="$MODULE_DIR$/bin">
-        <dependencies target-player="11.6">
+        <dependencies target-player="11.8">
           <entries>
             <entry module-name="Starling" build-configuration-name="starling">
               <dependency linkage="External" />
@@ -12,11 +12,9 @@
               <dependency linkage="External" />
             </entry>
           </entries>
-          <sdk name="flex_sdk_4" />
+          <sdk name="air_sdk" />
         </dependencies>
-        <compiler-options>
-          <option name="additionalOptions" value="-swf-version=18" />
-        </compiler-options>
+        <compiler-options />
         <packaging-air-desktop />
         <packaging-android />
         <packaging-ios />
@@ -31,7 +29,7 @@
       <excludeFolder url="file://$MODULE_DIR$/LogiDemo" />
       <excludeFolder url="file://$MODULE_DIR$/bin" />
     </content>
-    <orderEntry type="jdk" jdkName="flex_sdk_4" jdkType="Flex SDK Type (new)" />
+    <orderEntry type="jdk" jdkName="air_sdk" jdkType="Flex SDK Type (new)" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="Starling" exported="" />
     <orderEntry type="module" module-name="Feathers" exported="" />
