@@ -1,6 +1,7 @@
 package justpinegames.Logi
 {
     import feathers.controls.renderers.DefaultListItemRenderer;
+    import feathers.core.ITextRenderer;
 
     import flash.desktop.Clipboard;
     import flash.desktop.ClipboardFormats;
@@ -120,16 +121,21 @@ package justpinegames.Logi
             _list.scrollBarDisplayMode = Scroller.SCROLL_BAR_DISPLAY_MODE_NONE;
 
             _consoleContainer.addChild(_list);
+
+            _list.backgroundSkin = null;
             
             _copyButton = new Button();
 
             _copyButton.label = "Copy All";
             _copyButton.addEventListener(Event.ADDED, function(e:Event):void
             {
+                _copyButton.labelFactory = function():ITextRenderer
+                {
+                    return new BitmapFontTextRenderer();
+                };
                 _copyButton.defaultLabelProperties.smoothing = TextureSmoothing.NONE;
-                _copyButton.downLabelProperties.smoothing = TextureSmoothing.NONE;
-
                 _copyButton.defaultLabelProperties.textFormat = new BitmapFontTextFormat(_defaultFont, 16, _consoleSettings.textColor);
+                _copyButton.downLabelProperties.smoothing = TextureSmoothing.NONE;
                 _copyButton.downLabelProperties.textFormat = new BitmapFontTextFormat(_defaultFont, 16, _consoleSettings.highlightColor);
 
                 _copyButton.stateToSkinFunction = function(target:Object, state:Object, oldValue:Object = null):Object

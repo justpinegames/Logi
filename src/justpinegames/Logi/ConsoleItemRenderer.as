@@ -5,6 +5,7 @@ package justpinegames.Logi
     import feathers.controls.renderers.IListItemRenderer;
     import feathers.controls.text.BitmapFontTextRenderer;
     import feathers.core.FeathersControl;
+    import feathers.core.ITextRenderer;
     import feathers.text.BitmapFontTextFormat;
     import starling.events.Event;
     import starling.text.BitmapFont;
@@ -25,10 +26,13 @@ package justpinegames.Logi
             _format = _format ? _format : new BitmapFontTextFormat(new BitmapFont(), 16, labelColor);
             _formatHighlight = _formatHighlight ? _formatHighlight : new BitmapFontTextFormat(new BitmapFont(), 16, labelColorHighlight);
 
+            this.labelFactory = function():ITextRenderer
+            {
+                return new BitmapFontTextRenderer();
+            };
             this.defaultLabelProperties.smoothing = TextureSmoothing.NONE;
-            this.downLabelProperties.smoothing = TextureSmoothing.NONE;
-
             this.defaultLabelProperties.textFormat = new BitmapFontTextFormat(new BitmapFont(), 16, labelColor);
+            this.downLabelProperties.smoothing = TextureSmoothing.NONE;
             this.downLabelProperties.textFormat = new BitmapFontTextFormat(new BitmapFont(), 16, labelColor);
 
             this.horizontalAlign = HORIZONTAL_ALIGN_LEFT;
