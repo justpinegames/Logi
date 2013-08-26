@@ -247,15 +247,21 @@ package justpinegames.Logi
         {
             if (_consoleSettings.traceEnabled) trace(message);
 
-            var labelDisplay: String = (new Date()).toLocaleTimeString() + ": " + message;
+            var prefix:String = (new Date()).toLocaleTimeString() + ": ";
 
-            _list.dataProvider.push({label: labelDisplay, data: message});
+            var messageParts:Array = message.split("\n");
 
-            // TODO use the correct API, currently there is a problem with List max vertical position. A bug in foxhole?
-            //_list.verticalScrollPosition = Math.max(_list.dataProvider.length * 20 - _list.height, 0);
+            for each (var messagePart:String in messageParts)
+            {
+                showInHud(messagePart);
+
+                var labelDisplay:String = prefix + messagePart;
+                _list.dataProvider.push({label: labelDisplay, data: messagePart});
+
+                // after the first iteration set prefix to empty string:
+                prefix = "";
+            }
             _list.scrollToDisplayIndex(_list.dataProvider.length - 1);
-
-            showInHud(message);
         }
 
         private function showInHud(message:String):void
