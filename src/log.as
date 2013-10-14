@@ -1,8 +1,8 @@
 package  
 {
-	import justpinegames.Logi.Console;
-	
-	/**
+    import justpinegames.Logi.Console;
+
+    /**
 	 * Helper package-level function. Usage is the same as for the trace statemen.
 	 * 
 	 * For data sent to the log function to be displayed, you need to first create a LogConsole instance, and add it to the Starling stage.

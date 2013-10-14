@@ -4,13 +4,12 @@ package justpinegames.Logi
     import feathers.controls.List;
     import feathers.controls.renderers.IListItemRenderer;
     import feathers.controls.text.BitmapFontTextRenderer;
-    import feathers.core.FeathersControl;
     import feathers.core.ITextRenderer;
     import feathers.text.BitmapFontTextFormat;
-    import starling.events.Event;
+
     import starling.text.BitmapFont;
     import starling.textures.TextureSmoothing;
-    
+
     internal class ConsoleItemRenderer extends Button implements IListItemRenderer
     {
         private static var _format:BitmapFontTextFormat = null;
