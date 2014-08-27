@@ -2,7 +2,7 @@
 <module type="Flex" version="4">
   <component name="FlexBuildConfigurationManager" active="Logi">
     <configurations>
-      <configuration name="Logi" pure-as="true" output-type="Library" output-file="Logi.swc" output-folder="$MODULE_DIR$/bin">
+      <configuration name="Logi" pure-as="true" output-type="Library" output-file="Logi.swc" output-folder="$MODULE_DIR$/bin" skip-build="true">
         <dependencies target-player="11.8">
           <entries>
             <entry module-name="Feathers" build-configuration-name="Feathers">
@@ -14,7 +14,9 @@
           </entries>
           <sdk name="air_sdk" />
         </dependencies>
-        <compiler-options />
+        <compiler-options>
+          <option name="additionalOptions" value="-debug=false" />
+        </compiler-options>
         <packaging-air-desktop />
         <packaging-android />
         <packaging-ios />
