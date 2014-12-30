@@ -18,6 +18,7 @@ package justpinegames.Logi
         private var _data:Object;
         private var _index:int;
         private var _owner:List;
+        private var _isSelected:Boolean = false;
 
         public function ConsoleItemRenderer(labelColor:int, labelColorHighlight:int)
         {
@@ -51,6 +52,9 @@ package justpinegames.Logi
         
         public function get owner():List { return _owner; }
         public function set owner(value:List):void { _owner = value; }
+		
+        public function get isSelected():Boolean { return _isSelected; }
+        public function set isSelected(value:Boolean):void { _isSelected = value; }
 
     }
 }

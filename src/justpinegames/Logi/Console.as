@@ -6,7 +6,7 @@ package justpinegames.Logi
     import feathers.controls.Scroller;
     import feathers.controls.renderers.IListItemRenderer;
     import feathers.controls.text.BitmapFontTextRenderer;
-    import feathers.core.FeathersControl;
+    import feathers.controls.LayoutGroup;
     import feathers.core.ITextRenderer;
     import feathers.data.ListCollection;
     import feathers.layout.VerticalLayout;
@@ -64,7 +64,6 @@ package justpinegames.Logi
             _console = _console ? _console : this;
 
             _juggler = new Juggler();
-            Starling
 
             _data = new Vector.<Object>();
             
@@ -95,7 +94,7 @@ package justpinegames.Logi
             
             _isShown = false;
             
-            _consoleContainer = new FeathersControl();
+            _consoleContainer = new LayoutGroup();
             _consoleContainer.alpha = 0;
             _consoleContainer.y = -_consoleHeight;
             this.addChild(_consoleContainer);
@@ -108,7 +107,7 @@ package justpinegames.Logi
             _list = new List();
             _list.x = HORIZONTAL_PADDING;
             _list.y = VERTICAL_PADDING;
-            _list.itemRendererProperties.labelField = "data";
+            //_list.itemRendererProperties.labelField = "data";
             _list.dataProvider = new ListCollection(_data);
             _list.itemRendererFactory = function():IListItemRenderer
             {
@@ -156,7 +155,7 @@ package justpinegames.Logi
             _hudContainer.y = VERTICAL_PADDING;
             _hudContainer.touchable = false;
             _hudContainer.layout = new VerticalLayout();
-            _hudContainer.scrollerProperties.verticalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
+            _hudContainer.verticalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
             this.addChild(_hudContainer);
             
             this.setScreenSize(Starling.current.nativeStage.stageWidth, Starling.current.nativeStage.stageHeight);
@@ -278,7 +277,7 @@ package justpinegames.Logi
                 return label;
             };
 
-            var hudLabelContainer:FeathersControl = new FeathersControl();
+            var hudLabelContainer:LayoutGroup = new LayoutGroup();
             hudLabelContainer.width = 640;
             hudLabelContainer.height = 20;
 
