@@ -125,21 +125,27 @@ package justpinegames.Logi
             _copyButton = new Button();
 
             _copyButton.label = "Copy All";
+			
+            _copyButton.labelFactory = function():ITextRenderer
+            {
+                return new BitmapFontTextRenderer();
+            };
+			
+            var defaultLabelTextFormat:BitmapFontTextFormat = new BitmapFontTextFormat(_defaultFont, 16, _consoleSettings.textColor);
+            var downLabelTextFormat:BitmapFontTextFormat = new BitmapFontTextFormat(_defaultFont, 16, _consoleSettings.highlightColor);
+            var stateToSkinFunction:Function = function(target:Object, state:Object, oldValue:Object = null):Object
+            {
+                return null;
+            };
+
             _copyButton.addEventListener(Event.ADDED, function(e:Event):void
             {
-                _copyButton.labelFactory = function():ITextRenderer
-                {
-                    return new BitmapFontTextRenderer();
-                };
                 _copyButton.defaultLabelProperties.smoothing = TextureSmoothing.NONE;
-                _copyButton.defaultLabelProperties.textFormat = new BitmapFontTextFormat(_defaultFont, 16, _consoleSettings.textColor);
+                _copyButton.defaultLabelProperties.textFormat = defaultLabelTextFormat;
                 _copyButton.downLabelProperties.smoothing = TextureSmoothing.NONE;
-                _copyButton.downLabelProperties.textFormat = new BitmapFontTextFormat(_defaultFont, 16, _consoleSettings.highlightColor);
+                _copyButton.downLabelProperties.textFormat = downLabelTextFormat;
 
-                _copyButton.stateToSkinFunction = function(target:Object, state:Object, oldValue:Object = null):Object
-                {
-                    return null;
-                };
+                _copyButton.stateToSkinFunction = stateToSkinFunction;
 
                 _copyButton.width = 150;
                 _copyButton.height = 40;
