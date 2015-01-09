@@ -33,21 +33,21 @@ package justpinegames.Logi
             };
 
             var labelTextFormat:BitmapFontTextFormat = new BitmapFontTextFormat(new BitmapFont(), 16, labelColor);
-            var stateToSkinFunction:Function = function(target:Object, state:Object, oldValue:Object = null):Object
+            var itemStateToSkinFunction:Function = function(target:Object, state:Object, oldValue:Object = null):Object
             {
                 return null;
             };
 			
             this.addEventListener(Event.ADDED, function(e:Event):void
             {
-                this.defaultLabelProperties.smoothing = TextureSmoothing.NONE;
-                this.defaultLabelProperties.textFormat = labelTextFormat;
-                this.downLabelProperties.smoothing = TextureSmoothing.NONE;
-                this.downLabelProperties.textFormat = labelTextFormat;
+                defaultLabelProperties.smoothing = TextureSmoothing.NONE;
+                defaultLabelProperties.textFormat = labelTextFormat;
+                downLabelProperties.smoothing = TextureSmoothing.NONE;
+                downLabelProperties.textFormat = labelTextFormat;
 
-                this.horizontalAlign = HORIZONTAL_ALIGN_LEFT;
+                horizontalAlign = HORIZONTAL_ALIGN_LEFT;
 
-                this.stateToSkinFunction = stateToSkinFunction;
+                stateToSkinFunction = itemStateToSkinFunction;
             });
         }
 
