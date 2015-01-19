@@ -7,6 +7,7 @@ package justpinegames.Logi
     import feathers.core.ITextRenderer;
     import feathers.text.BitmapFontTextFormat;
 
+    import starling.events.Event;
     import starling.text.BitmapFont;
     import starling.textures.TextureSmoothing;
 
@@ -30,12 +31,24 @@ package justpinegames.Logi
             {
                 return new BitmapFontTextRenderer();
             };
-            this.defaultLabelProperties.smoothing = TextureSmoothing.NONE;
-            this.defaultLabelProperties.textFormat = new BitmapFontTextFormat(new BitmapFont(), 16, labelColor);
-            this.downLabelProperties.smoothing = TextureSmoothing.NONE;
-            this.downLabelProperties.textFormat = new BitmapFontTextFormat(new BitmapFont(), 16, labelColor);
 
-            this.horizontalAlign = HORIZONTAL_ALIGN_LEFT;
+            var labelTextFormat:BitmapFontTextFormat = new BitmapFontTextFormat(new BitmapFont(), 16, labelColor);
+            var itemStateToSkinFunction:Function = function(target:Object, state:Object, oldValue:Object = null):Object
+            {
+                return null;
+            };
+			
+            this.addEventListener(Event.ADDED, function(e:Event):void
+            {
+                defaultLabelProperties.smoothing = TextureSmoothing.NONE;
+                defaultLabelProperties.textFormat = labelTextFormat;
+                downLabelProperties.smoothing = TextureSmoothing.NONE;
+                downLabelProperties.textFormat = labelTextFormat;
+
+                horizontalAlign = HORIZONTAL_ALIGN_LEFT;
+
+                stateToSkinFunction = itemStateToSkinFunction;
+            });
         }
 
         public function get data():Object { return _data; }
