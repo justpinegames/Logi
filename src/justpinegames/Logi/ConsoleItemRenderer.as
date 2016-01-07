@@ -20,6 +20,7 @@ package justpinegames.Logi
         private var _index:int;
         private var _owner:List;
         private var _isSelected:Boolean = false;
+        private var _factoryID:String = null;
 
         public function ConsoleItemRenderer(labelColor:int, labelColorHighlight:int)
         {
@@ -68,6 +69,9 @@ package justpinegames.Logi
 		
         public function get isSelected():Boolean { return _isSelected; }
         public function set isSelected(value:Boolean):void { _isSelected = value; }
+		
+        public function get factoryID():String { return _factoryID; }
+        public function set factoryID(value:String):void { _factoryID = value; }
 
     }
 }
