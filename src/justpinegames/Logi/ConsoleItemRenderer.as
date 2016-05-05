@@ -41,9 +41,9 @@ package justpinegames.Logi
 			
             this.addEventListener(Event.ADDED, function(e:Event):void
             {
-                defaultLabelProperties.smoothing = TextureSmoothing.NONE;
+                defaultLabelProperties.textureSmoothing = TextureSmoothing.NONE;
                 defaultLabelProperties.textFormat = labelTextFormat;
-                downLabelProperties.smoothing = TextureSmoothing.NONE;
+                downLabelProperties.textureSmoothing = TextureSmoothing.NONE;
                 downLabelProperties.textFormat = labelTextFormat;
 
                 horizontalAlign = HORIZONTAL_ALIGN_LEFT;
