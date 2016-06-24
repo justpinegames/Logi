@@ -140,9 +140,9 @@ package justpinegames.Logi
 
             _copyButton.addEventListener(Event.ADDED, function(e:Event):void
             {
-                _copyButton.defaultLabelProperties.smoothing = TextureSmoothing.NONE;
+                _copyButton.defaultLabelProperties.textureSmoothing = TextureSmoothing.NONE;
                 _copyButton.defaultLabelProperties.textFormat = defaultLabelTextFormat;
-                _copyButton.downLabelProperties.smoothing = TextureSmoothing.NONE;
+                _copyButton.downLabelProperties.textureSmoothing = TextureSmoothing.NONE;
                 _copyButton.downLabelProperties.textFormat = downLabelTextFormat;
 
                 _copyButton.stateToSkinFunction = stateToSkinFunction;
@@ -277,7 +277,7 @@ package justpinegames.Logi
                 {
                     label.textFormat = format;
                 });
-                label.smoothing = TextureSmoothing.NONE;
+                label.textureSmoothing = TextureSmoothing.NONE;
                 label.text = text;
                 label.validate();
                 return label;
